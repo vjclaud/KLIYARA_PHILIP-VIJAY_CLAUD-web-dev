@@ -8,7 +8,14 @@ body {
     overflow: hidden;
 }
 
-.icon {
-    margin-right: 15px;
+.icon-left {
     margin-left: 15px;
+}
+
+.icon-right {
+    margin-right: 15px;
+}
+
+.borderless {
+    border: 0px;
 }
