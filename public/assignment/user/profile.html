@@ -2,31 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1.25, maximum-scale=1, user-scalable=no">
+
     <title>Profile</title>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
           crossorigin="anonymous"/>
-    <link href="css/style.css"
+    <link href="/assignment/css/style.css"
           rel="stylesheet"/>
 </head>
 <body>
-<div class="container">
-    
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-                    Fixed Top
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                Profile
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="#" class="navbar-link">
+                    <span class="glyphicon glyphicon-ok icon"></span>
                 </a>
-                <p class="navbar-text pull-right">
-                    <a href="#" class="navbar-link">
-                        <span class="glyphicon glyphicon-ok icon"></span>
-                    </a>
-                </p>
-            </div>
+            </p>
         </div>
-    </nav>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Success!</strong> The changes you made were saved.
+    </div>
 
     <form>
         <div class="form-group">
@@ -64,17 +73,19 @@
     <a class="btn btn-danger btn-block"
        href="login.html"
        role="button">Logout</a>
-    <nav class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container">
-            <div class="row navbar-text">
-                <div class="text-center">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-user pull-right icon"></span>
-                    </a>
-                </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="row navbar-text">
+            <div class="text-center">
+                <a href="#">
+                    <span class="glyphicon glyphicon-user pull-right icon"></span>
+                </a>
             </div>
         </div>
-    </nav>
-</div>
+    </div>
+</nav>
+
 </body>
 </html>
