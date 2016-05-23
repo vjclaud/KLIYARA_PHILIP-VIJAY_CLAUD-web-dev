@@ -1,0 +1,13 @@
+input.form-control {
+    margin-bottom: 5px;
+}
+
+body {
+    padding-top: 56px;
+    padding-bottom: 30px;
+    overflow: hidden;
+}
+
+.icon {
+    padding-right: 18px;
+}
