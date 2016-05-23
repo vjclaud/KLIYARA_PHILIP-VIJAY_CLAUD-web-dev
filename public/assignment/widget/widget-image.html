@@ -2,9 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1.25, maximum-scale=1, user-scalable=no">
+
+    <title>Edit Widget</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+          crossorigin="anonymous"/>
+    <link href="/assignment/css/style.css"
+          rel="stylesheet"/>
 </head>
 <body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="/assignment/widget/widget-chooser.html" class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left icon-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="#">
+                Edit Widget
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="/assignment/widget/widget-list.html" class="navbar-link">
+                    <span class="glyphicon glyphicon-ok icon-right"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <form>
+        <div class="form-group">
+            <label for="widget-image-name">Name</label>
+            <input value="Blog Post"
+                   placeholder="Name"
+                   type="text"
+                   class="form-control"
+                   id="widget-image-name"/>
+        </div>
+        <div class="form-group">
+            <label for="widget-image-text">Text</label>
+            <input placeholder="Text"
+                   type="text"
+                   class="form-control"
+                   id="widget-image-text"/>
+        </div>
+        <div class="form-group">
+            <label for="widget-image-url">URL</label>
+            <input placeholder="Image URL"
+                   type="text"
+                   class="form-control"
+                   id="widget-image-url"/>
+        </div>
+        <div class="form-group">
+            <label for="widget-image-width">Width</label>
+            <input placeholder="Width"
+                   type="text"
+                   class="form-control"
+                   id="widget-image-width"/>
+        </div>
+        <div class="form-group">
+            <label for="widget-image-upload">Upload</label>
+            <input placeholder="Width"
+                   type="file"
+                   class="form-control"
+                   id="widget-image-upload"/>
+        </div>
+    </form>
+    <a class="btn btn-danger btn-block"
+       href="/assignment/widget/widget-chooser.html"
+       role="button">Delete</a>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="row navbar-text">
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+                <a href="/assignment/user/profile.html">
+                    <span class="glyphicon glyphicon-user pull-right icon-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
 
 </body>
 </html>
