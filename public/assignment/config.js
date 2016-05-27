@@ -50,5 +50,9 @@
             .when("/widget-youtube", {
                 templateUrl : "views/widget/widget-youtube.view.client.html"
             })
+
+            .otherwise({
+                redirectTo : "/login"
+            })
     }
 })();
