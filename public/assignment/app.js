@@ -1,7 +1,7 @@
 // IIFE Immediately invoked global expression
 
 (function () {
-    angular.module("WebAppMaker", []);
+    angular.module("WebAppMaker", ["ngRoute"]);
 })();
 
 
