@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("LoginViewController", LoginViewController);
 
-    function LoginViewController() {
+    function LoginViewController($location) {
 
         var users = [
             {_id: "123", username: "alice",	password: "alice",	firstName: "Alice",  lastName: "Wonder"  },
@@ -16,7 +16,7 @@
         vm.login = function (username, password) {
             for(var i in users){
                 if(users[i].username === username && users[i].password === password){
-                    console.log("YAY");
+                    $location.url("/profile/" + users[i]._id);
                 }else{
                     vm.error = "incorrect username and password";
                 }
