@@ -13,30 +13,33 @@
     function UserService() {
         var api = {
             createUser : createUser,
-            findUserByUsernameAndPassword : findUserByUsernameAndPassword,
+            findUserByCredentials : findUserByCredentials,
             findUserById : findUserById,
-            updateUserById : updateUserById,
+            findUserByUsername : findUserByUsername,
+            updateUser : updateUser,
             deleteUser : deleteUser
         }
 
         return api;
-        
-        
-        function deleteUser(user) {
-            for(var i in users){
-                if(users[i]._id === id){
-                    users.splice(i,1);
-                    return true;
-                }
-            }
-            return false;
-        }
 
         function createUser(user) {
-            users.push(user);
+
         }
-        
-        function findUserByUsernameAndPassword(username, password) {
+
+        function findUserById(userId) {
+            for(var i in users){
+                if(users[i]._id === userId){
+                    return users[i];
+                }
+            }
+            return null;
+        }
+
+        function findUserByUsername(username) {
+
+        }
+
+        function findUserByCredentials(username, password) {
             for(var i in users){
                 if(users[i].username === username && users[i].password === password){
                     return users[i];
@@ -45,26 +48,28 @@
             return null;
         }
 
-        function findUserById(id) {
-            for(var i in users){
-                if(users[i]._id === id){
-                    return users[i];
-                }
-            }
-            return null;
-        }
+        function updateUser(userId, user) {
+            var userToUpdate = findUserById(userId);
 
-        function updateUserById(id, newUser) {
-            var user = findUserById(id);
-
-            if(user){
-                user.email = newUser.email;
-                user.firstName = newUser.firstName;
-                user.lastName = newUser.lastName;
+            if(userToUpdate){
+                userToUpdate.email = user.email;
+                userToUpdate.firstName = user.firstName;
+                userToUpdate.lastName = user.lastName;
                 return true;
             }else{
                 return false;
             }
         }
+
+        function deleteUser(userId) {
+            for(var i in users){
+                if(users[i]._id === userId){
+                    users.splice(i,1);
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 })();

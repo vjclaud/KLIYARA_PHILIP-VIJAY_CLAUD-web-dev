@@ -5,17 +5,17 @@
 
     function ProfileViewController($routeParams, UserService) {
         var vm = this;
-        var id = $routeParams.id;
+        var uid = $routeParams.uid;
         vm.updateUser = updateUser;
 
         function init() {
-            vm.user = UserService.findUserById(id);
+            vm.user = UserService.findUserById(uid);
         }
 
         init();
 
         function updateUser(newUser) {
-            if(UserService.updateUserById(id, newUser)){
+            if(UserService.updateUser(uid, newUser)){
                 vm.message = "Your profile was updated successfully";
             }else{
                 vm.message = "Couldn't update profile"

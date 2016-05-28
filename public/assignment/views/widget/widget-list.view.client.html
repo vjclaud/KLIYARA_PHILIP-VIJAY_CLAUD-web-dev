@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#/page-list" class="navbar-link">
+                <a href="#/user/{{model.user._id}}/website/{{model.website._id}}/page" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left icon-left"></span>
                 </a>
             </p>
@@ -10,7 +10,7 @@
                 Widgets
             </a>
             <p class="navbar-text pull-right">
-                <a href="#/widget-chooser" class="navbar-link">
+                <a href="#/user/{{model.user._id}}/website/{{model.website._id}}/page/{{model.page._id}}/widget/new" class="navbar-link">
                     <span class="glyphicon glyphicon-plus icon-right"></span>
                 </a>
             </p>
@@ -40,7 +40,7 @@
     </div>
     <div class="wd-widget">
         <div class="widget-tool">
-            <a href="#/widget-image">
+            <a href="#/user/{{model.user._id}}/website/{{model.website._id}}/page/{{model.page._id}}/widget/{{model.widget._id}}">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
             <span class="glyphicon glyphicon-align-justify"></span>
@@ -50,7 +50,7 @@
     </div>
     <div class="wd-widget">
         <div class="widget-tool">
-            <a href="#/widget-image">
+            <a href="#/user/{{model.user._id}}/website/{{model.website._id}}/page/{{model.page._id}}/widget/{{model.widget._id}}">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
             <span class="glyphicon glyphicon-align-justify"></span>
@@ -59,7 +59,7 @@
     </div>
     <div class="wd-widget">
         <div class="widget-tool">
-            <a href="#/widget-youtube">
+            <a href="#/user/{{model.user._id}}/website/{{model.website._id}}/page/{{model.page._id}}/widget/{{model.widget._id}}">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
             <span class="glyphicon glyphicon-align-justify"></span>
@@ -80,7 +80,7 @@
             <div class="col-xs-3 text-center">
             </div>
             <div class="col-xs-3 text-center">
-                <a href="#/profile">
+                <a href="#/user/{{model.user._id}}">
                     <span class="glyphicon glyphicon-user pull-right icon-right"></span>
                 </a>
             </div>
