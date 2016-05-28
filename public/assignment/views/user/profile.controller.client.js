@@ -15,11 +15,11 @@
         init();
 
         function updateUser(newUser) {
-            vm.user.firstName = newUser.firstName;
-            vm.user.email = newUser.email;
-            vm.user.lastName = newUser.lastName;
-
-
+            if(UserService.updateUserById(id, newUser)){
+                vm.message = "Your profile was updated successfully";
+            }else{
+                vm.message = "Couldn't update profile"
+            }
         }
 
     }

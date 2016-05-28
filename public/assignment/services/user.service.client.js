@@ -12,11 +12,29 @@
 
     function UserService() {
         var api = {
+            createUser : createUser,
             findUserByUsernameAndPassword : findUserByUsernameAndPassword,
-            findUserById : findUserById
+            findUserById : findUserById,
+            updateUserById : updateUserById,
+            deleteUser : deleteUser
         }
 
         return api;
+        
+        
+        function deleteUser(user) {
+            for(var i in users){
+                if(users[i]._id === id){
+                    users.splice(i,1);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function createUser(user) {
+            users.push(user);
+        }
         
         function findUserByUsernameAndPassword(username, password) {
             for(var i in users){
@@ -34,6 +52,19 @@
                 }
             }
             return null;
+        }
+
+        function updateUserById(id, newUser) {
+            var user = findUserById(id);
+
+            if(user){
+                user.email = newUser.email;
+                user.firstName = newUser.firstName;
+                user.lastName = newUser.lastName;
+                return true;
+            }else{
+                return false;
+            }
         }
     }
 })();
