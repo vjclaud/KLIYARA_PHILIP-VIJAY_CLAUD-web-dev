@@ -28,6 +28,12 @@
                 controllerAs : "model"
             })
 
+
+            .when("/user/:uid/website/:wid/page/new", {
+                templateUrl : "views/page/page-new.view.client.html",
+                controller : "PageNewViewController",
+                controllerAs : "model"
+            })
             .when("/user/:uid/website/:wid/page/:pid", {
                 templateUrl : "views/page/page-edit.view.client.html",
                 controller : "PageEditViewController",
@@ -38,12 +44,13 @@
                 controller : "PageListViewController",
                 controllerAs : "model"
             })
-            .when("/user/:uid/website/:wid/page/new", {
-                templateUrl : "views/page/page-new.view.client.html",
-                controller : "PageNewViewController",
+
+
+            .when("/user/:uid/website/new", {
+                templateUrl : "views/website/website-new.view.client.html",
+                controller : "WebsiteNewViewController",
                 controllerAs : "model"
             })
-
             .when("/user/:uid/website/:wid", {
                 templateUrl : "views/website/website-edit.view.client.html",
                 controller : "WebsiteEditViewController",
@@ -52,11 +59,6 @@
             .when("/user/:uid/website", {
                 templateUrl : "views/website/website-list.view.client.html",
                 controller : "WebsiteListViewController",
-                controllerAs : "model"
-            })
-            .when("/user/:uid/website/new", {
-                templateUrl : "views/website/website-new.view.client.html",
-                controller : "WebsiteNewViewController",
                 controllerAs : "model"
             })
 

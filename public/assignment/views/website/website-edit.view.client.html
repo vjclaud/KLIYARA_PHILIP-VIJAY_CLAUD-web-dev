@@ -2,15 +2,15 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#/user/{{model.user._id}}/website" class="navbar-link">
+                <a href="#/user/{{model.uid}}/website" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left icon-left"></span>
                 </a>
             </p>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand">
                 Edit Website
             </a>
             <p class="navbar-text pull-right">
-                <a href="#/user/{{model.user._id}}/website" class="navbar-link">
+                <a ng-click = "model.updateWebsite(model.website)" href="#/user/{{model.uid}}/website" class="navbar-link">
                     <span class="glyphicon glyphicon-ok icon-right"></span>
                 </a>
             </p>
@@ -23,7 +23,8 @@
     <form>
         <div class="form-group">
             <label for="website-name">Website Name</label>
-            <input value="Apple"
+            <input ng-model = "model.website.name"
+                   value="Apple"
                    placeholder="Website Name"
                    type="text"
                    class="form-control"
@@ -31,14 +32,16 @@
         </div>
         <div class="form-group">
             <label for="website-description">Website Description</label>
-            <textarea placeholder="Website description"
+            <textarea ng-model = "model.website.description"
+                      placeholder="Website description"
                       rows="4"
                       class="form-control"
                       id="website-description">Apple Inc. is an American multinational technology company headquartered in Cupertino, California, that designs, develops, and sells consumer electronics, computer software, and online services. Its hardware products include the iPhone smartphone, the iPad tablet computer, the Mac personal computer, the iPod portable media player, and the Apple Watch smartwatch. Apple's consumer software includes the OS X and iOS operating systems, the iTunes media player, the Safari web browser, and the iLife and iWork creativity and productivity suites. Its online services include the iTunes Store, the iOS App Store and Mac App Store, and iCloud.</textarea>
         </div>
     </form>
-    <a class="btn btn-danger btn-block"
-       href="#/user/{{model.user._id}}/website"
+    <a ng-click = "model.deleteWebsite(model.wid)"
+       class="btn btn-danger btn-block"
+       href="#/user/{{model.uid}}/website"
        role="button">Delete</a>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
@@ -52,7 +55,7 @@
             <div class="col-xs-3 text-center">
             </div>
             <div class="col-xs-3 text-center">
-                <a href="#/user/{{model.user._id}}">
+                <a href="#/user/{{model.uid}}">
                     <span class="glyphicon glyphicon-user pull-right icon-right"></span>
                 </a>
             </div>

@@ -8,9 +8,9 @@
         init();
 
 
-
         function init() {
-
+            vm.uid = $routeParams['uid'];
+            vm.websites = WebsiteService.findWebsitesByUser($routeParams['uid']);
         }
     }
 

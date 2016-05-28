@@ -10,7 +10,7 @@
                 New Website
             </a>
             <p class="navbar-text pull-right">
-                <a href="#/user/{{model.user._id}}/website" class="navbar-link">
+                <a ng-click="model.createWebsite(name, description)" class="navbar-link">
                 <span class="glyphicon glyphicon-ok icon-right"></span>
                 </a>
             </p>
@@ -23,14 +23,16 @@
     <form>
         <div class="form-group">
             <label for="website-name">Name</label>
-            <input placeholder="Website name"
+            <input ng-model ="name"
+                   placeholder="Website name"
                    type="text"
                    class="form-control"
                    id="website-name"/>
         </div>
         <div class="form-group">
             <label for="website-description">Description</label>
-            <textarea placeholder="Website description"
+            <textarea ng-model ="description"
+                      placeholder="Website description"
                       rows="4"
                       class="form-control"
                       id="website-description"></textarea>
