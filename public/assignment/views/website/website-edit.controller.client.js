@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("WebsiteEditViewController", WebsiteEditViewController);
 
-    function WebsiteEditViewController($routeParams, WebsiteService) {
+    function WebsiteEditViewController($location, $routeParams, WebsiteService) {
         var vm = this;
         vm.uid = $routeParams['uid'];
         vm.wid = $routeParams['wid'];
@@ -14,15 +14,26 @@
 
 
         function init() {
-            vm.website = WebsiteService.findWebsiteById(vm.wid);
+            vm.website = angular.copy(WebsiteService.findWebsiteById(vm.wid));
         }
 
         function updateWebsite(website) {
-            WebsiteService.updateWebsite(vm.wid, website);
+            var updated = WebsiteService.updateWebsite(vm.wid, website);
+            if(updated){
+                $location.url("/user/" + vm.uid + "/website");
+            }else{
+                vm.error = "couldn't update website";
+            }
         }
 
         function deleteWebsite() {
-            WebsiteService.deleteWebsite(vm.wid);
+
+            var deleted = WebsiteService.deleteWebsite(vm.wid);
+            if(deleted){
+                $location.url("/user/" + vm.uid + "/website");
+            }else{
+                vm.error = "couldn't delete website";
+            }
         }
     }
 

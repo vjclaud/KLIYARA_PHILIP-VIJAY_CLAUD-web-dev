@@ -6,7 +6,7 @@
                     <span class="glyphicon glyphicon-chevron-left icon-left"></span>
                 </a>
             </p>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand">
                 New Website
             </a>
             <p class="navbar-text pull-right">
@@ -19,7 +19,7 @@
 </nav>
 
 <div class="container">
-
+    <div ng-if ="model.error" class="alert alert-danger" role="alert">{{model.error}}</div>
     <form>
         <div class="form-group">
             <label for="website-name">Name</label>
