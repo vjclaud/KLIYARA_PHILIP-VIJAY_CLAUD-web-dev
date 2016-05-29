@@ -2,15 +2,15 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#/widget-list" class="navbar-link">
+                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left icon-left"></span>
                 </a>
             </p>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand">
                 Edit Widget
             </a>
             <p class="navbar-text pull-right">
-                <a href="#/widget-list" class="navbar-link">
+                <a ng-click="model.updateWidget(model.widget)" class="navbar-link">
                     <span class="glyphicon glyphicon-ok icon-right"></span>
                 </a>
             </p>
@@ -23,7 +23,8 @@
     <form>
         <div class="form-group">
             <label for="widget-heading-name">Name</label>
-            <input value="Blog Post"
+            <input ng-model="model.widget.name"
+                   value="{{model.widget.name}}"
                    placeholder="Heading Name"
                    type="text"
                    class="form-control"
@@ -31,21 +32,50 @@
         </div>
         <div class="form-group">
             <label for="widget-heading-text">Text</label>
-            <input placeholder="Text"
+            <input ng-model="model.widget.text"
+                   value="{{model.widget.text}}"
+                   placeholder="Text"
                    type="text"
                    class="form-control"
                    id="widget-heading-text"/>
         </div>
-        <div class="form-group">
+        <div ng-if="model.widget.size" class="form-group">
             <label for="widget-heading-size">Size</label>
-            <input placeholder="Size"
+            <input ng-model="model.widget.size"
+                   value="{{model.widget.size}}"
+                   placeholder="Size"
                    type="text"
                    class="form-control"
                    id="widget-heading-size"/>
         </div>
+        <div ng-if="model.widget.url" class="form-group">
+            <label for="widget-url">URL</label>
+            <input ng-model="model.widget.url"
+                   value="{{model.widget.url}}"
+                   placeholder="URL"
+                   type="text"
+                   class="form-control"
+                   id="widget-url"/>
+        </div>
+        <div ng-if="model.widget.width" class="form-group">
+            <label for="widget-width">Width</label>
+            <input ng-model="model.widget.width"
+                   value="{{model.widget.width}}"
+                   placeholder="Width"
+                   type="text"
+                   class="form-control"
+                   id="widget-width"/>
+        </div>
+        <div ng-if="model.upload" class="form-group">
+            <label for="widget-image-upload">Upload</label>
+            <input placeholder="Width"
+                   type="file"
+                   class="form-control"
+                   id="widget-image-upload"/>
+        </div>
     </form>
     <a class="btn btn-danger btn-block"
-       href="#/widget-list"
+       ng-click="model.deleteWidget(model.widget)"
        role="button">Delete</a>
 </div>
 
@@ -59,7 +89,7 @@
             <div class="col-xs-3 text-center">
             </div>
             <div class="col-xs-3 text-center">
-                <a href="#/profile">
+                <a href="#/user/{{model.uid}}">
                     <span class="glyphicon glyphicon-user pull-right icon-right"></span>
                 </a>
             </div>
