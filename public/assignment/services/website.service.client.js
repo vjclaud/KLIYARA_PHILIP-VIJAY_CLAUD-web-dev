@@ -31,10 +31,10 @@
 
         function createWebsiteWithDetails(name, description, userId) {
             var website = {
-                "_id": (new Date()).getTime(),
-                "name": name,
-                "description": description,
-                "developerId": userId
+                "_id": (new Date()).getTime() + "",
+                "name": name + "",
+                "description": description + "",
+                "developerId": userId + ""
             }
             return createWebsite(userId, website);
         }
@@ -43,7 +43,7 @@
             var userWebsites = [];
 
             for(var i in websites){
-                if(websites[i].developerId == userId){
+                if(websites[i].developerId === userId +""){
                     userWebsites.push(websites[i]);
                 }
             }
@@ -52,7 +52,7 @@
 
         function findWebsiteById(websiteId){
             for(var i in websites){
-                if(websites[i]._id == websiteId){
+                if(websites[i]._id === websiteId +""){
                     return websites[i];
                 }
             }
@@ -61,7 +61,7 @@
 
         function updateWebsite(websiteId, website) {
             for(var i in websites){
-                if(websites[i]._id == websiteId){
+                if(websites[i]._id === websiteId+""){
                     websites[i].name = website.name;
                     websites[i].description = website.description;
                 }
@@ -70,7 +70,7 @@
 
         function deleteWebsite(websiteId) {
             for(var i in websites){
-                if(websites[i]._id == websiteId){
+                if(websites[i]._id === websiteId+""){
                     websites.splice(i,1);
                     return true;
                 }

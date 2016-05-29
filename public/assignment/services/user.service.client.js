@@ -13,6 +13,7 @@
     function UserService() {
         var api = {
             createUser : createUser,
+            createUserWithUsernameAndPassword : createUserWithUsernameAndPassword,
             findUserByCredentials : findUserByCredentials,
             findUserById : findUserById,
             findUserByUsername : findUserByUsername,
@@ -23,12 +24,21 @@
         return api;
 
         function createUser(user) {
+            users.push(user);
+        }
 
+        function createUserWithUsernameAndPassword(username, password) {
+            var user = {
+                _id: (new Date()).getTime() + "",
+                username: username + "",
+                password: password + ""
+            }
+            createUser(user);
         }
 
         function findUserById(userId) {
             for(var i in users){
-                if(users[i]._id === userId){
+                if(users[i]._id === userId + ""){
                     return users[i];
                 }
             }
@@ -50,7 +60,6 @@
 
         function updateUser(userId, user) {
             var userToUpdate = findUserById(userId);
-
             if(userToUpdate){
                 userToUpdate.email = user.email;
                 userToUpdate.firstName = user.firstName;
@@ -63,7 +72,7 @@
 
         function deleteUser(userId) {
             for(var i in users){
-                if(users[i]._id == userId){
+                if(users[i]._id === userId + ""){
                     users.splice(i,1);
                     return true;
                 }

@@ -9,12 +9,13 @@
         vm.updateUser = updateUser;
 
         function init() {
-            vm.user = UserService.findUserById(uid);
+            vm.user = angular.copy(UserService.findUserById(uid));
         }
 
         init();
 
         function updateUser(newUser) {
+            var email = newUser.email;
             if(UserService.updateUser(uid, newUser)){
                 vm.message = "Your profile was updated successfully";
             }else{

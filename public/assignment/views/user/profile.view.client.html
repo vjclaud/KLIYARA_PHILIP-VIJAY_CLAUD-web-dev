@@ -1,11 +1,12 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand">
                 Profile
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click = "model.updateUser(model.user)" class="navbar-link">
+                <a ng-click = "model.updateUser(model.user)"
+                   class="navbar-link">
                     <span class="glyphicon glyphicon-ok icon-right"></span>
                 </a>
             </p>
@@ -19,11 +20,13 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         {{model.message}}
     </div>
+    <div ng-if ="model.error" class="alert alert-danger" role="alert">{{model.error}}</div>
 
-    <form>
+    <form name="profileForm">
         <div  class="form-group">
             <label for="username">Username</label>
-            <input ng-model = "model.user.username"
+            <input disabled
+                   ng-model = "model.user.username"
                    placeholder="vjclaud"
                    type="text"
                    class="form-control"

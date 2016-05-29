@@ -3,14 +3,21 @@
         .module("WebAppMaker")
         .controller("RegisterViewController", RegisterViewController);
 
-    function RegisterViewController($routeParams, UserService) {
+    function RegisterViewController($location, UserService) {
         var vm = this;
-        init();
-
-
+        vm.registerUser = registerUser;
         
-        function init() {
-
+        function registerUser(username, password, rpassword) {
+            if(!username || username.length < 3){
+                vm.error = "username must be at least 3 characters long";
+            }else if(!password || password.length < 3){
+                vm.error = "password must be at least 3 characters long";
+            }else if(password != rpassword){
+                vm.error = "passwords did not match";
+            }else{
+                $location.url("/login");
+                UserService.createUserWithUsernameAndPassword(username,password);
+            }
         }
     }
 
