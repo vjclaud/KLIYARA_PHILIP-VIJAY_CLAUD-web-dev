@@ -14,9 +14,10 @@
 </nav>
 
 <div class="container">
+    <div ng-if ="model.error" class="alert alert-danger" role="alert">{{model.error}}</div>
     <ul class="list-group ">
         <li ng-repeat="widgetTemplate in model.widgetTemplates" class="list-group-item borderless">
-            <a ng-click ="model.widgetClicked(widgetTemplate.widgetType)">
+            <a ng-click ="model.widgetClicked(widgetTemplate.widgetType)" href="">
                 {{widgetTemplate.label}}
             </a>
         </li>

@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("WidgetChooserViewController", WidgetChooserViewController);
 
-    function WidgetChooserViewController($routeParams, WidgetService) {
+    function WidgetChooserViewController($location, $routeParams, WidgetService) {
         var vm = this;
         vm.uid = $routeParams['uid'];
         vm.pid = $routeParams['pid'];
@@ -16,8 +16,9 @@
             vm.widgetTemplates = WidgetService.getWidgetTemplates();
         }
         
-        function widgetClicked() {
-            //#/user/{{uid}}/website/{{model.website._id}}/page/{{model.page._id}}/widget/{{model.widget._id}}
+        function widgetClicked(widgetType) {
+            var widget = WidgetService.createWidgetOfType(vm.pid, widgetType);
+            $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/" + widget._id);
         }
     }
 

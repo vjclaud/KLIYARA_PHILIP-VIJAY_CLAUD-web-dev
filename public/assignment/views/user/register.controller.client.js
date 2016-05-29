@@ -15,8 +15,9 @@
             }else if(password != rpassword){
                 vm.error = "passwords did not match";
             }else{
-                $location.url("/login");
-                UserService.createUserWithUsernameAndPassword(username,password);
+                var user = UserService.createUserWithUsernameAndPassword(username,password);
+                $location.url("/user/" + user._id);
+
             }
         }
     }

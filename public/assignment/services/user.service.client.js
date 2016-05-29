@@ -25,6 +25,7 @@
 
         function createUser(user) {
             users.push(user);
+            return user;
         }
 
         function createUserWithUsernameAndPassword(username, password) {
@@ -33,7 +34,7 @@
                 username: username + "",
                 password: password + ""
             }
-            createUser(user);
+            return createUser(user);
         }
 
         function findUserById(userId) {

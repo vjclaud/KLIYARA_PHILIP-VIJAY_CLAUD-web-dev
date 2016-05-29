@@ -19,7 +19,7 @@
 </nav>
 
 <div class="container">
-
+    <div ng-if ="model.error" class="alert alert-danger" role="alert">{{model.error}}</div>
     <div ng-repeat ="widget in model.widgets" class="wd-widget">
         <div class="widget-tool">
             <a ng-click = "model.editWidget(widget)">

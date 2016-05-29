@@ -19,7 +19,7 @@
 </nav>
 
 <div class="container">
-
+    <div ng-if ="model.error" class="alert alert-danger" role="alert">{{model.error}}</div>
     <form>
         <div class="form-group">
             <label for="widget-heading-name">Name</label>
@@ -39,7 +39,7 @@
                    class="form-control"
                    id="widget-heading-text"/>
         </div>
-        <div ng-if="model.widget.size" class="form-group">
+        <div ng-if="model.showSize" class="form-group">
             <label for="widget-heading-size">Size</label>
             <input ng-model="model.widget.size"
                    value="{{model.widget.size}}"
@@ -48,7 +48,7 @@
                    class="form-control"
                    id="widget-heading-size"/>
         </div>
-        <div ng-if="model.widget.url" class="form-group">
+        <div ng-if="model.showUrl" class="form-group">
             <label for="widget-url">URL</label>
             <input ng-model="model.widget.url"
                    value="{{model.widget.url}}"
@@ -57,7 +57,7 @@
                    class="form-control"
                    id="widget-url"/>
         </div>
-        <div ng-if="model.widget.width" class="form-group">
+        <div ng-if="model.showWidth" class="form-group">
             <label for="widget-width">Width</label>
             <input ng-model="model.widget.width"
                    value="{{model.widget.width}}"
@@ -66,7 +66,7 @@
                    class="form-control"
                    id="widget-width"/>
         </div>
-        <div ng-if="model.upload" class="form-group">
+        <div ng-if="model.showUpload" class="form-group">
             <label for="widget-image-upload">Upload</label>
             <input placeholder="Width"
                    type="file"
@@ -74,6 +74,8 @@
                    id="widget-image-upload"/>
         </div>
     </form>
+    <a ng-if="model.showUpload" class="btn btn-primary btn-block"
+       role="button">Upload</a>
     <a class="btn btn-danger btn-block"
        ng-click="model.deleteWidget(model.widget)"
        role="button">Delete</a>

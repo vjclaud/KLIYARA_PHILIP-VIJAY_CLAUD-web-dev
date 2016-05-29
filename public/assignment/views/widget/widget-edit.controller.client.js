@@ -19,8 +19,20 @@
 
         function init() {
             vm.widget = angular.copy(WidgetService.findWidgetById(vm.wgid));
-            if(vm.widget.widgetType === "IMAGE"){
-                vm.upload = true;
+
+            switch (vm.widget.widgetType + ""){
+                case "HEADER" :
+                    vm.showSize = true;
+                    break;
+                case "IMAGE" :
+                    vm.showUrl = true;
+                    vm.showWidth = true;
+                    vm.showUpload = true;
+                    break;
+                case "YOUTUBE" :
+                    vm.showUrl = true;
+                    vm.showWidth = true;
+                    break;
             }
         }
 

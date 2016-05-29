@@ -17,20 +17,14 @@
 
     var widgetTemplates = [
         { "widgetType": "HEADER", "label": "Header"},
-        { "widgetType": "LABEL", "label": "Label"},
-        { "widgetType": "HTML", "label": "HTML"},
         { "widgetType": "IMAGE", "label": "Image"},
-        { "widgetType": "YOUTUBE", "label": "Youtube"},
-        { "widgetType": "TEXTINPUT", "label": "Text Input"},
-        { "widgetType": "LINK", "label": "Link"},
-        { "widgetType": "BUTTON", "label": "Button"},
-        { "widgetType": "DATATABLE", "label": "Data Table"},
-        { "widgetType": "REPEATER", "label": "Repeater"}
+        { "widgetType": "YOUTUBE", "label": "Youtube"}
     ]
 
     function WidgetService() {
         var api = {
             createWidget : createWidget,
+            createWidgetOfType : createWidgetOfType,
             findWidgetsByPageId : findWidgetsByPageId,
             findWidgetById : findWidgetById,
             updateWidget : updateWidget,
@@ -41,7 +35,29 @@
         return api;
 
         function createWidget(pageId, widget) {
+            widgets.push(widget);
+            return widget;
+        }
 
+        function createWidgetOfType(pageId, widgetType) {
+            var widget = {
+                "_id": (new Date()).getTime() + "",
+                "pageId" : pageId + "",
+                "name": "",
+                "text": ""
+            };
+
+            if(widgetType + "" === "HEADER"){
+                widget['size'] = 1;
+            }
+
+            if(widgetType + "" === "IMAGE" || widgetType + "" === "YOUTUBE"){
+                widget['width'] = "100%";
+                widget['url'] = ""
+            }
+            widget['widgetType'] = widgetType + "";
+
+            return createWidget(pageId, widget);
         }
 
         function findWidgetsByPageId(pageId){
@@ -52,8 +68,7 @@
                     userWidgets.push(widgets[i]);
                 }
             }
-            //return userWidgets;
-            return widgets;
+            return userWidgets;
         }
 
         function findWidgetById(widgetId){
