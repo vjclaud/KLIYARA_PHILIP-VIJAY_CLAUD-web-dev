@@ -9,7 +9,12 @@
         vm.updateUser = updateUser;
 
         function init() {
-            vm.user = angular.copy(UserService.findUserById(uid));
+            UserService
+                .findUserById(uid)
+                .then(function (response) {
+                    vm.user = response.data;
+                })
+
         }
 
         init();

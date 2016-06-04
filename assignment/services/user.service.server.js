@@ -57,7 +57,8 @@ module.exports = function(app) {
 
     function createUser(req, res) {
         var user = req.body;
+        user._id = (new Date()).getTime() + "";
         users.push(user);
-        res.send(users);
+        res.send(user);
     }
 };
