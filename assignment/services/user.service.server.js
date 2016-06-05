@@ -8,6 +8,8 @@ module.exports = function(app) {
     ];
 
     app.post("/api/user", createUser);
+    app.put("/api/user/:userId", updateUser);
+    app.delete("/api/user/:userId", deleteUser);
     app.get("/api/user", getUsers);
     app.get("/api/user/:userId", findUserById);
 
@@ -60,5 +62,32 @@ module.exports = function(app) {
         user._id = (new Date()).getTime() + "";
         users.push(user);
         res.send(user);
+    }
+
+    function updateUser(req, res) {
+        var updatedUser = req.body;
+        var userId = req.params['userId'];
+        for(var i in users){
+            if(users[i]._id === userId + ""){
+                users[i].firstName = updatedUser.firstName;
+                users[i].lastName = updatedUser.lastName;
+                users[i].email = updatedUser.email;
+                res.send(200);
+                return;
+            }
+        }
+        res.send(400);
+    }
+
+    function deleteUser(req, res) {
+        var userId = req.params['userId'];
+        for(var i in users){
+            if(users[i]._id === userId + ""){
+                users.splice(i,1);
+                res.send(200);
+                return;
+            }
+        }
+        res.send(400);
     }
 };

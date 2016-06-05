@@ -15,25 +15,35 @@
 
 
         function init() {
-            vm.page = angular.copy(PageService.findPageById(vm.pid));
+            PageService
+                .findPageById(vm.pid)
+                .then(function (response) {
+                    vm.page = response.data;
+                });
         }
 
         function updatePage(page) {
-            var updated = PageService.updatePage(vm.pid, page);
-            if(updated){
-                $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page");
-            }else{
-                vm.error = "couldn't update page";
-            }
+            PageService
+                .updatePage(vm.pid, page)
+                .then(
+                    function () {
+                        $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page");
+                    },
+                    function () {
+                        vm.error = "couldn't update page";
+                    });
         }
 
         function deletePage() {
-            var deleted = PageService.deletePage(vm.pid);
-            if(deleted){
-                $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page");
-            }else{
-                vm.error = "couldn't delete page";
-            }
+            PageService
+                .deletePage(vm.pid)
+                .then(
+                    function () {
+                        $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page");
+                    },
+                    function () {
+                        vm.error = "couldn't delete page";
+                    });
         }
     }
 

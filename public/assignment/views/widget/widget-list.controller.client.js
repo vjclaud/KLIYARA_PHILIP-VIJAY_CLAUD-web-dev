@@ -15,7 +15,11 @@
         init();
 
         function init() {
-            vm.widgets = angular.copy(WidgetService.findWidgetsByPageId(vm.pid));
+             WidgetService
+                 .findWidgetsByPageId(vm.pid)
+                 .then(function (response) {
+                     vm.widgets = response.data;
+                 });
         }
 
         function getSafeHtml(widget) {

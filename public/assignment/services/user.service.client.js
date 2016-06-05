@@ -46,25 +46,14 @@
         }
 
         function updateUser(userId, user) {
-            var userToUpdate = findUserById(userId);
-            if(userToUpdate){
-                userToUpdate.email = user.email;
-                userToUpdate.firstName = user.firstName;
-                userToUpdate.lastName = user.lastName;
-                return true;
-            }else{
-                return false;
-            }
+
+            var url = "/api/user/" + userId;
+            return $http.put(url,user);
         }
 
         function deleteUser(userId) {
-            for(var i in users){
-                if(users[i]._id === userId + ""){
-                    users.splice(i,1);
-                    return true;
-                }
-            }
-            return false;
+            var url = "/api/user/" + userId;
+            return $http.delete(url);
         }
 
     }

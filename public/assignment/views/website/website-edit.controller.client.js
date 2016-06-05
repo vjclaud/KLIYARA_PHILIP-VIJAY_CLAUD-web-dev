@@ -14,26 +14,36 @@
 
 
         function init() {
-            vm.website = angular.copy(WebsiteService.findWebsiteById(vm.wid));
+            WebsiteService
+                .findWebsiteById(vm.wid)
+                .then(function (response) {
+                    vm.website = response.data;
+                });
         }
 
         function updateWebsite(website) {
-            var updated = WebsiteService.updateWebsite(vm.wid, website);
-            if(updated){
-                $location.url("/user/" + vm.uid + "/website");
-            }else{
-                vm.error = "couldn't update website";
-            }
+            WebsiteService
+                .updateWebsite(vm.wid, website)
+                .then(
+                    function () {
+                        $location.url("/user/" + vm.uid + "/website");
+                    },
+                    function () {
+                        vm.error = "couldn't update website";
+                    });
         }
 
         function deleteWebsite() {
 
-            var deleted = WebsiteService.deleteWebsite(vm.wid);
-            if(deleted){
-                $location.url("/user/" + vm.uid + "/website");
-            }else{
-                vm.error = "couldn't delete website";
-            }
+            WebsiteService
+                .deleteWebsite(vm.wid)
+                .then(
+                    function () {
+                        $location.url("/user/" + vm.uid + "/website");
+                    },
+                    function () {
+                        vm.error = "couldn't delete website";
+                    });
         }
     }
 

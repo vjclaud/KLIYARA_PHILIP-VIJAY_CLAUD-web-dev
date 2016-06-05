@@ -13,12 +13,20 @@
         init();
 
         function init() {
-            vm.widgetTemplates = WidgetService.getWidgetTemplates();
+            WidgetService
+                .getWidgetTemplates()
+                .then(function (response) {
+                    vm.widgetTemplates = response.data;
+                });
         }
         
         function widgetClicked(widgetType) {
-            var widget = WidgetService.createWidgetOfType(vm.pid, widgetType);
-            $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/" + widget._id);
+            WidgetService
+                .createWidgetOfType(vm.pid, widgetType)
+                .then(function (response) {
+                    var widget = response.data;
+                    $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/" + widget._id);
+                });
         }
     }
 

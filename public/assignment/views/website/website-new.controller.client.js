@@ -14,12 +14,15 @@
             if(!name || name.length < 3){
                 vm.error = "website name should be at least 3 charaters long";
             }else{
-                var website = WebsiteService.createWebsiteWithDetails(name, description, vm.uid);
-                if(website){
-                    $location.url("/user/" + vm.uid + "/website");
-                }else{
-                    vm.error = "couldn't create website";
-                }
+                WebsiteService.createWebsiteWithDetails(name, description, vm.uid)
+                    .then(function (response) {
+                        var website = response.data;
+                        if(website){
+                            $location.url("/user/" + vm.uid + "/website");
+                        }else{
+                            vm.error = "couldn't create website";
+                        }
+                    });
             }
         }
     }

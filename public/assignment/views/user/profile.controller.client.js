@@ -20,12 +20,16 @@
         init();
 
         function updateUser(newUser) {
-            var email = newUser.email;
-            if(UserService.updateUser(uid, newUser)){
-                vm.message = "Your profile was updated successfully";
-            }else{
-                vm.message = "Couldn't update profile"
-            }
+            UserService
+                .updateUser(uid, newUser)
+                .then(
+                    function (response) {
+                        vm.message = "Your profile was updated successfully";
+                    },
+                    function () {
+                        vm.message = "Couldn't update profile";
+                    }
+                );
         }
 
     }
