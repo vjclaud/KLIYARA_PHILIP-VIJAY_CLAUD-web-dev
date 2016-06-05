@@ -12,7 +12,8 @@
             updateWidget : updateWidget,
             deleteWidget : deleteWidget,
             getWidgetTemplates : getWidgetTemplates,
-            searchPhotos : searchPhotos
+            searchPhotos : searchPhotos,
+            updateWidgetOrder : updateWidgetOrder
         }
 
         var key = "2a5913d474436821258dba7b143b1831";
@@ -74,6 +75,11 @@
         function searchPhotos(searchTerm) {
             var url = urlBase.replace("API_KEY", key).replace("TEXT", searchTerm);
             return $http.get(url);
+        }
+
+        function updateWidgetOrder(widgets) {
+            var url = "/api/updateWidgetOrder";
+            return $http.post(url, widgets);
         }
     }
 })();

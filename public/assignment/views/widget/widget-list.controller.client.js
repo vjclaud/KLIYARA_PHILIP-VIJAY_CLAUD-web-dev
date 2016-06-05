@@ -11,6 +11,7 @@
         vm.getSafeHtml = getSafeHtml;
         vm.getSafeUrl = getSafeUrl;
         vm.editWidget = editWidget;
+        vm.updateWidgetOrder = updateWidgetOrder;
 
         init();
 
@@ -20,6 +21,10 @@
                  .then(function (response) {
                      vm.widgets = response.data;
                  });
+        }
+        
+        function updateWidgetOrder() {
+            WidgetService.updateWidgetOrder(vm.widgets);
         }
 
         function getSafeHtml(widget) {

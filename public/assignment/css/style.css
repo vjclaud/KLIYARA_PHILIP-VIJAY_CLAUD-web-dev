@@ -2,6 +2,10 @@ input.form-control {
     margin-bottom: 5px;
 }
 
+form.form-with-button {
+    margin-bottom: 5px;
+}
+
 body {
     padding-top: 56px;
     padding-bottom: 56px;

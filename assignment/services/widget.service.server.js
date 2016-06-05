@@ -1,5 +1,8 @@
 module.exports = function(app) {
 
+    var multer = require('multer'); // npm install multer --save
+    var upload = multer({ dest: __dirname+'/../../public/uploads' });
+
     var widgets = [
         { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO"},
         { "_id": "234", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
@@ -20,11 +23,17 @@ module.exports = function(app) {
     ];
 
     app.post("/api/page/:pageId/widget", createWidget);
+    app.post("/api/updateWidgetOrder", updateWidgetOrder);
     app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
     app.get("/api/widget/:widgetId", getWidgets);
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
+    app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
+
+    function updateWidgetOrder(req, res) {
+        widgets = req.body;
+    }
     function createWidget(req, res){
         var widget = req.body;
         widget._id = (new Date()).getTime() + "";
@@ -96,4 +105,28 @@ module.exports = function(app) {
     function getWidgetTemplates(res) {
         res.send(widgetTemplates);
     }
+
+    function uploadImage(req, res) {
+        var uid      = req.body.uid;
+        var wid      = req.body.wid;
+        var pid      = req.body.pid;
+        var widgetId      = req.body.widgetId;
+        var width         = req.body.width;
+        var myFile        = req.file;
+        var originalname  = myFile.originalname; // file name on user's computer
+        var filename      = myFile.filename;     // new file name in upload folder
+        var path          = myFile.path;         // full path of uploaded file
+        var destination   = myFile.destination;  // folder where file is saved to
+        var size          = myFile.size;
+        var mimetype      = myFile.mimetype;
+
+        for(var i in widgets){
+            if(widgets[i]._id === widgetId+""){
+                widgets[i].url = "/uploads/" + filename;
+            }
+        }
+
+        res.redirect("/assignment/#/user/" + uid + "/website/" + wid + "/page/" + pid + "/widget/" + widgetId);
+    }
+
 };

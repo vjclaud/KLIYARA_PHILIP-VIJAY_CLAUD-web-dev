@@ -66,16 +66,16 @@
                    class="form-control"
                    id="widget-width"/>
         </div>
-        <div ng-if="model.showUpload" class="form-group">
-            <label for="widget-image-upload">Upload</label>
-            <input placeholder="Width"
-                   type="file"
-                   class="form-control"
-                   id="widget-image-upload"/>
-        </div>
     </form>
-    <a ng-if="model.showUpload" class="btn btn-primary btn-block"
-       role="button">Upload</a>
+    <form class="form-with-button" ng-if="model.showUpload" action="/api/upload"  method="post" enctype="multipart/form-data">
+        <input  name="myFile"   type="file" class="form-control"/>
+        <input  name="width"    value="{{model.widget.width}}" style="display: none"/>
+        <input  name="uid"    value="{{model.uid}}" style="display: none"/>
+        <input  name="wid"    value="{{model.wid}}" style="display: none"/>
+        <input  name="pid"    value="{{model.pid}}" style="display: none"/>
+        <input  name="widgetId" value="{{model.widget._id}}"   style="display: none"/>
+        <button type="submit"   class="btn btn-block btn-primary">Upload Image</button>
+    </form>
     <a ng-if="model.showFlickr"
        href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{model.wgid}}/flickr"
        class="btn btn-primary btn-block btn-block"
