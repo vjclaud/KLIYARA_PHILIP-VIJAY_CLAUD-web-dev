@@ -76,6 +76,10 @@
     </form>
     <a ng-if="model.showUpload" class="btn btn-primary btn-block"
        role="button">Upload</a>
+    <a ng-if="model.showFlickr"
+       href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{model.wgid}}/flickr"
+       class="btn btn-primary btn-block btn-block"
+       role="button">Search Flickr</a>
     <a class="btn btn-danger btn-block"
        ng-click="model.deleteWidget(model.widget)"
        role="button">Delete</a>

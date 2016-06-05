@@ -61,6 +61,10 @@
                 <img width="{{widget.width}}"
                      ng-src="{{widget.url}}"/>
             </div>
+            <div ng-switch-when="FLICKR">
+                <img width="{{widget.width}}"
+                     ng-src="{{widget.url}}"/>
+            </div>
             <div ng-switch-when="YOUTUBE">
                 <iframe width="{{widget.width}}"
                         ng-src="{{model.getSafeUrl(widget)}}"

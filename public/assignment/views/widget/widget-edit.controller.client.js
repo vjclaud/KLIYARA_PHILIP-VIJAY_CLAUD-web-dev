@@ -34,6 +34,11 @@
                              vm.showUrl = true;
                              vm.showWidth = true;
                              break;
+                         case "FLICKR" :
+                             vm.showUrl = true;
+                             vm.showWidth = true;
+                             vm.showFlickr = true;
+                             break;
                      }
                  });
         }

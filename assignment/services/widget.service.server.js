@@ -15,7 +15,8 @@ module.exports = function(app) {
     var widgetTemplates = [
         { "widgetType": "HEADER", "label": "Header"},
         { "widgetType": "IMAGE", "label": "Image"},
-        { "widgetType": "YOUTUBE", "label": "Youtube"}
+        { "widgetType": "YOUTUBE", "label": "Youtube"},
+        { "widgetType": "FLICKR", "label": "Flickr"}
     ];
 
     app.post("/api/page/:pageId/widget", createWidget);

@@ -11,8 +11,13 @@
             findWidgetById : findWidgetById,
             updateWidget : updateWidget,
             deleteWidget : deleteWidget,
-            getWidgetTemplates : getWidgetTemplates
+            getWidgetTemplates : getWidgetTemplates,
+            searchPhotos : searchPhotos
         }
+
+        var key = "2a5913d474436821258dba7b143b1831";
+        var secret = "de58d31218cb107c";
+        var urlBase = "https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&api_key=API_KEY&text=TEXT";
 
         return api;
 
@@ -32,7 +37,7 @@
                 widget['size'] = 1;
             }
 
-            if(widgetType + "" === "IMAGE" || widgetType + "" === "YOUTUBE"){
+            if(widgetType + "" === "IMAGE" || widgetType + "" === "YOUTUBE" || widgetType + "" === "FLICKR"){
                 widget['width'] = "100%";
                 widget['url'] = ""
             }
@@ -63,6 +68,11 @@
 
         function getWidgetTemplates() {
             var url = "/api/widget/widgetTemplates";
+            return $http.get(url);
+        }
+
+        function searchPhotos(searchTerm) {
+            var url = urlBase.replace("API_KEY", key).replace("TEXT", searchTerm);
             return $http.get(url);
         }
     }
