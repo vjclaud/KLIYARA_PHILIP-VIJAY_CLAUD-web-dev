@@ -5,8 +5,8 @@ const http         = require('http'),
       sysInfo      = require('./utils/sys-info'),
       env          = process.env;
 
-let server = http.createServer(function (req, res) {
-  let url = req.url;
+var server = http.createServer(function (req, res) {
+  var url = req.url;
   if (url == '/') {
     url += 'index.html';
   }
@@ -27,7 +27,7 @@ let server = http.createServer(function (req, res) {
         res.writeHead(404);
         res.end();
       } else {
-        let ext = path.extname(url).slice(1);
+        var ext = path.extname(url).slice(1);
         res.setHeader('Content-Type', contentTypes[ext]);
         if (ext === 'html') {
           res.setHeader('Cache-Control', 'no-cache, no-store');
@@ -39,5 +39,5 @@ let server = http.createServer(function (req, res) {
 });
 
 server.listen(env.NODE_PORT || 3000, env.NODE_IP || 'localhost', function () {
-  console.log(`Application worker ${process.pid} started...`);
+  console.log('Application worker ${process.pid} started...');
 });
