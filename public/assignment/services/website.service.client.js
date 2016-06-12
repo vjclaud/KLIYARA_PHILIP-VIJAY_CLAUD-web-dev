@@ -24,8 +24,7 @@
         function createWebsiteWithDetails(name, description, userId) {
             var website = {
                 "name": name ? name + "" : "",
-                "description": description ? description + "" : "",
-                "developerId": userId + ""
+                "description": description ? description + "" : ""
             }
             return createWebsite(userId, website);
         }

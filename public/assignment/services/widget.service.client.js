@@ -29,7 +29,6 @@
 
         function createWidgetOfType(pageId, widgetType) {
             var widget = {
-                "pageId" : pageId + "",
                 "name": "",
                 "text": ""
             };
@@ -39,7 +38,7 @@
             }
 
             if(widgetType + "" === "IMAGE" || widgetType + "" === "YOUTUBE" || widgetType + "" === "FLICKR"){
-                widget['width'] = "100%";
+                widget['width'] = 100;
                 widget['url'] = ""
             }
             widget['widgetType'] = widgetType + "";

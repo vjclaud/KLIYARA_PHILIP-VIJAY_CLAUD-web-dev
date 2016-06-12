@@ -29,8 +29,7 @@
         function createPageWithDetails(name, title, websiteId) {
             var page = {
                 "name": name ? name + "" : "",
-                "title": title ? title + "" : "",
-                "websiteId": websiteId + ""
+                "title": title ? title + "" : ""
             }
             return createPage(websiteId, page);
         }

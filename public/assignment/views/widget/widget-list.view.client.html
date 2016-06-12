@@ -58,15 +58,15 @@
                 <div ng-bind-html = "model.getSafeHtml(widget)"></div>
             </div>
             <div ng-switch-when="IMAGE">
-                <img width="{{widget.width}}"
+                <img width="{{widget.width}}%"
                      ng-src="{{widget.url}}"/>
             </div>
             <div ng-switch-when="FLICKR">
-                <img width="{{widget.width}}"
+                <img width="{{widget.width}}%"
                      ng-src="{{widget.url}}"/>
             </div>
             <div ng-switch-when="YOUTUBE">
-                <iframe width="{{widget.width}}"
+                <iframe width="{{widget.width}}%"
                         ng-src="{{model.getSafeUrl(widget)}}"
                         frameborder="0"
                         allowfullscreen>
