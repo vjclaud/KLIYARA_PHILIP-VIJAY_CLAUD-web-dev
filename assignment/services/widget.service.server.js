@@ -9,7 +9,8 @@ module.exports = function(app, models) {
         { "widgetType": "HEADER", "label": "Header"},
         { "widgetType": "IMAGE", "label": "Image"},
         { "widgetType": "YOUTUBE", "label": "Youtube"},
-        { "widgetType": "FLICKR", "label": "Flickr"}
+        { "widgetType": "FLICKR", "label": "Flickr"},
+        { "widgetType": "HTML", "label": "HTML"}
     ];
 
     app.post("/api/page/:pageId/widget", createWidget);
@@ -27,6 +28,7 @@ module.exports = function(app, models) {
     function createWidget(req, res){
         var pageId = req.params['pageId'];
         var widget = req.body;
+
         widgetModel
             .createWidget(pageId, widget)
             .then(

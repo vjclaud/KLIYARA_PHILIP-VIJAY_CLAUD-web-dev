@@ -12,6 +12,7 @@
         vm.getSafeUrl = getSafeUrl;
         vm.editWidget = editWidget;
         vm.updateWidgetOrder = updateWidgetOrder;
+        vm.updateWidget = updateWidget;
 
         init();
 
@@ -25,6 +26,11 @@
         
         function updateWidgetOrder() {
             WidgetService.updateWidgetOrder(vm.widgets);
+        }
+
+        function updateWidget(wgid, widget) {
+            WidgetService
+                .updateWidget(wgid, widget);
         }
 
         function getSafeHtml(widget) {

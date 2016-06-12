@@ -15,12 +15,39 @@
                     start = ui.item.index();
                 },
                 stop : function (event, ui) {
+                    var localCodyWidgets = angular.copy(scope.model.widgets);
+                    localCodyWidgets.sort(function(a, b) {
+                        return a.order > b.order;
+                    });
                     end = ui.item.index();
-                    var temp = scope.model.widgets[start];
-                    scope.model.widgets[start] = scope.model.widgets[end];
-                    scope.model.widgets[end] = temp;
+
+
+                    if(start < end){
+                        var endOrder = localCodyWidgets[end].order;
+                        for(var i = start + 1; i <=end; i++){
+                            localCodyWidgets[i].order = localCodyWidgets[i].order -1;
+                        }
+                        localCodyWidgets[start].order = endOrder;
+                    }else if(end < start){
+                        var endOrder = localCodyWidgets[end].order;
+                        for(var i = start - 1; i >=end; i--){
+                            localCodyWidgets[i].order = localCodyWidgets[i].order +1;
+                        }
+                        localCodyWidgets[start].order = endOrder;
+                    }
+
+                    scope.model.widgets = localCodyWidgets;
+
+                    if(start < end){
+                        for(var i = start; i <=end; i++){
+                            scope.model.updateWidget(localCodyWidgets[i]._id, localCodyWidgets[i]);
+                        }
+                    }else if(end < start){
+                        for(var i = start; i >=end; i--){
+                            scope.model.updateWidget(localCodyWidgets[i]._id, localCodyWidgets[i]);
+                        }
+                    }
                     scope.$apply();
-                    scope.model.updateWidgetOrder();
                 }
             });
         }

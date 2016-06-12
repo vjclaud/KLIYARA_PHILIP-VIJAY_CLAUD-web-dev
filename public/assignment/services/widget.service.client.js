@@ -36,7 +36,7 @@
             if(widgetType + "" === "HEADER"){
                 widget['size'] = 1;
             }
-
+            
             if(widgetType + "" === "IMAGE" || widgetType + "" === "YOUTUBE" || widgetType + "" === "FLICKR"){
                 widget['width'] = 100;
                 widget['url'] = ""

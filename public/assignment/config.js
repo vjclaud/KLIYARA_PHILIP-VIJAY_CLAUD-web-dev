@@ -87,6 +87,11 @@
                 controller : "WidgetFlickrViewController",
                 controllerAs : "model"
             })
+            .when("/user/:uid/website/:wid/page/:pid/widget/:wgid/html", {
+                templateUrl : "views/widget/widget-html.view.client.html",
+                controller : "WidgetHtmlViewController",
+                controllerAs : "model"
+            })
             .when("/user/:uid/website/:wid/page/:pid/widget/:wgid", {
                 templateUrl : "views/widget/widget-edit.view.client.html",
                 controller : "WidgetEditViewController",
