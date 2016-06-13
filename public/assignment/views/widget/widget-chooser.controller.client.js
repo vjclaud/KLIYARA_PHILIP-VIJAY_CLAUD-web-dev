@@ -25,11 +25,7 @@
                 .createWidgetOfType(vm.pid, widgetType)
                 .then(function (response) {
                     var widget = response.data;
-                    if(widget.widgetType === "HTML"){
-                        $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/" + widget._id  + "/html");
-                    }else{
-                        $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/" + widget._id);
-                    }
+                    $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/" + widget._id);
 
                 });
         }

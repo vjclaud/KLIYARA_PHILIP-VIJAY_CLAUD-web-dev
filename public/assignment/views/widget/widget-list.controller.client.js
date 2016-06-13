@@ -47,6 +47,7 @@
 
         function editWidget(widget) {
             $location.url("/user/" + vm.uid +"/website/" + vm.wid +"/page/" + vm.pid +"/widget/" + widget._id);
+
         }
     }
 

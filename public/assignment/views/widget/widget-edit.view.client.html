@@ -23,48 +23,91 @@
     <form>
         <div class="form-group">
             <label for="widget-heading-name">Name</label>
-            <input ng-model="model.widget.name"
+            <input type="text"
+                   ng-model="model.widget.name"
                    value="{{model.widget.name}}"
                    placeholder="Heading Name"
-                   type="text"
                    class="form-control"
                    id="widget-heading-name"/>
         </div>
+        <div ng-if="model.showClass" class="form-group">
+            <label for="widget-class">Class</label>
+            <input type="text"
+                   ng-model="model.widget.class"
+                   value="{{model.widget.class}}"
+                   placeholder="Class"
+                   class="form-control"
+                   id="widget-class"/>
+        </div>
         <div class="form-group">
             <label for="widget-heading-text">Text</label>
-            <input ng-model="model.widget.text"
+            <input ng-if="!model.showHtml"
+                   type="text"
+                   ng-model="model.widget.text"
                    value="{{model.widget.text}}"
                    placeholder="Text"
-                   type="text"
                    class="form-control"
                    id="widget-heading-text"/>
         </div>
         <div ng-if="model.showSize" class="form-group">
             <label for="widget-heading-size">Size</label>
-            <input ng-model="model.widget.size"
+            <input type="text"
+                   ng-model="model.widget.size"
                    value="{{model.widget.size}}"
                    placeholder="Size"
-                   type="text"
                    class="form-control"
                    id="widget-heading-size"/>
         </div>
         <div ng-if="model.showUrl" class="form-group">
             <label for="widget-url">URL</label>
-            <input ng-model="model.widget.url"
+            <input type="text"
+                   ng-model="model.widget.url"
                    value="{{model.widget.url}}"
                    placeholder="URL"
-                   type="text"
                    class="form-control"
                    id="widget-url"/>
         </div>
         <div ng-if="model.showWidth" class="form-group">
             <label for="widget-width">Width</label>
-            <input ng-model="model.widget.width"
+            <input type="number"
+                   ng-model="model.widget.width"
                    value="{{model.widget.width}}"
                    placeholder="Width"
-                   type="text"
+                   max=100
+                   min=1
                    class="form-control"
                    id="widget-width"/>
+        </div>
+        <div ng-if="model.showPlaceholder" class="form-group">
+            <label for="widget-placeholder">Placeholder</label>
+            <input type="text"
+                   ng-model="model.widget.placeholder"
+                   value="{{model.widget.placeholder}}"
+                   placeholder="Placeholder"
+                   class="form-control"
+                   id="widget-placeholder"/>
+        </div>
+        <div ng-if="model.showRows" class="form-group">
+            <label for="widget-rows">Rows</label>
+            <input type="number"
+                   ng-model="model.widget.rows"
+                   value={{model.widget.rows}}
+                   min=1
+                   class="form-control"
+                   id="widget-rows"/>
+        </div>
+        <div ng-if="model.showFormatted" class="form-group">
+            <label for="widget-formatted">Formatted</label>
+            <input type="checkbox"
+                   ng-model="model.widget.formatted"
+                   value="{{model.widget.formatted}}"
+                   id="widget-formatted"/>
+        </div>
+        <div ng-if="model.showHtml" ng-model="model.widget.text"
+             text-angular
+             ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+        ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+        ['indent','outdent'],['html']]">
         </div>
     </form>
     <form class="form-with-button" ng-if="model.showUpload" action="/api/upload"  method="post" enctype="multipart/form-data">

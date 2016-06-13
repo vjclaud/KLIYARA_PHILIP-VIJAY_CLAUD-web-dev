@@ -39,6 +39,15 @@
                              vm.showWidth = true;
                              vm.showFlickr = true;
                              break;
+                         case "TEXT" :
+                             vm.showRows = true;
+                             vm.showPlaceholder = true;
+                             vm.showFormatted = true;
+                             break;
+                         case "HTML" :
+                             vm.showHtml = true;
+                             vm.showClass = true;
+                             break;
                      }
                  });
         }

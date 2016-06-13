@@ -36,6 +36,14 @@
             if(widgetType + "" === "HEADER"){
                 widget['size'] = 1;
             }
+
+            if(widgetType + "" === "HTML"){
+                widget['class'] = "";
+            }
+
+            if(widgetType + "" === "TEXT"){
+                widget['rows'] = 1;
+            }
             
             if(widgetType + "" === "IMAGE" || widgetType + "" === "YOUTUBE" || widgetType + "" === "FLICKR"){
                 widget['width'] = 100;

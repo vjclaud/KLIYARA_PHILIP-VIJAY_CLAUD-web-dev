@@ -10,7 +10,8 @@ module.exports = function(app, models) {
         { "widgetType": "IMAGE", "label": "Image"},
         { "widgetType": "YOUTUBE", "label": "Youtube"},
         { "widgetType": "FLICKR", "label": "Flickr"},
-        { "widgetType": "HTML", "label": "HTML"}
+        { "widgetType": "HTML", "label": "HTML"},
+        { "widgetType": "TEXT", "label": "Text"}
     ];
 
     app.post("/api/page/:pageId/widget", createWidget);
