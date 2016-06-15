@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="MovieSuggester">
 <head>
     <meta charset="UTF-8">
-    <title>Project Home Page</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1.25, maximum-scale=1, user-scalable=no">
+    <title>WAM</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+          crossorigin="anonymous"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
+          rel="stylesheet"
+          integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
+          crossorigin="anonymous">
+    <link href="/assignment/css/style.css"
+          rel="stylesheet"/>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <link href="../css/jquery-ui.css"
+          rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
+    <script src="../js/textAngular.min.js"></script>
+    <script src="../js/textAngular-rangy.min.js"></script>
+    <script src="../js/textAngular-sanitize.min.js"></script>
+    <link href="../css/textAngular.css"
+          rel="stylesheet"/>
+    <script src="../directive/wdSortable.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
 </head>
 <body>
-    <h1>Project Home Page</h1>
+<div ng-view></div>
 </body>
 </html>

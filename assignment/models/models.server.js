@@ -1,7 +1,7 @@
 module.exports = function(){
 
     var mongoose = require('mongoose');
-    var connection = mongoose.connect('mongodb://localhost/wamDatabase');
+    var connection = mongoose.connect('mongodb://localhost/webdev');
     var autoIncrement = require('mongoose-auto-increment');
     autoIncrement.initialize(connection);
 
