@@ -2,9 +2,6 @@ module.exports = function(){
 
     var mongoose = require('mongoose');
     var connection = mongoose.connect('mongodb://localhost/webdev');
-    var autoIncrement = require('mongoose-auto-increment');
-    autoIncrement.initialize(connection);
-
     var models = {
         userModel: require("./user/user.model.server")(),
         websiteModel: require("./website/website.model.server")(),

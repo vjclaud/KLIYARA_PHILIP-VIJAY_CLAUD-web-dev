@@ -2,8 +2,6 @@ module.exports = function () {
     var mongoose = require("mongoose");
     var WidgetSchema = require("./widget.schema.server")();
     var Widget = mongoose.model("Widget", WidgetSchema);
-    var autoIncrement = require('mongoose-auto-increment');
-    WidgetSchema.plugin(autoIncrement.plugin, { model: 'Widget', field: 'order' });
 
     var api = {
         createWidget : createWidget,
