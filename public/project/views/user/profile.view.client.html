@@ -1,0 +1,69 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">
+                Profile
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click = "model.updateUser(model.user)"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-ok icon-right"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div ng-if="model.message" class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{model.message}}
+    </div>
+    <div ng-if ="model.error" class="alert alert-danger" role="alert">{{model.error}}</div>
+
+    <form name="profileForm">
+        <div  class="form-group">
+            <label for="username">Username</label>
+            <input disabled
+                   ng-model = "model.user.username"
+                   placeholder="vjclaud"
+                   type="text"
+                   class="form-control"
+                   id="username"/>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input ng-model = "model.user.email"
+                   placeholder="kliyaraphilip.v@husky.neu.edu"
+                   type="email"
+                   class="form-control"
+                   id="email"/>
+        </div>
+        <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input ng-model = "model.user.firstName"
+                   placeholder="Vijay"
+                   type="text"
+                   class="form-control"
+                   id="first-name"/>
+        </div>
+        <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input ng-model = "model.user.lastName"
+                   placeholder="Claud"
+                   type="text"
+                   class="form-control"
+                   id="last-name"/>
+        </div>
+    </form>
+    <a class="btn btn-primary btn-block"
+       href="#"
+       role="button">Watchlist</a>
+    <a class="btn btn-primary btn-block"
+       href="#"
+       role="button">Don't Show List</a>
+    <a class="btn btn-danger btn-block"
+       href="#/login"
+       role="button">Logout</a>
+</div>

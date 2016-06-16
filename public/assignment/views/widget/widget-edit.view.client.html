@@ -1,0 +1,147 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget" class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left icon-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand">
+                Edit Widget
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.updateWidget(model.widget)" class="navbar-link">
+                    <span class="glyphicon glyphicon-ok icon-right"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div ng-if ="model.error" class="alert alert-danger" role="alert">{{model.error}}</div>
+    <form>
+        <div class="form-group">
+            <label for="widget-heading-name">Name</label>
+            <input type="text"
+                   ng-model="model.widget.name"
+                   value="{{model.widget.name}}"
+                   placeholder="Heading Name"
+                   class="form-control"
+                   id="widget-heading-name"/>
+        </div>
+        <div ng-if="model.showClass" class="form-group">
+            <label for="widget-class">Class</label>
+            <input type="text"
+                   ng-model="model.widget.class"
+                   value="{{model.widget.class}}"
+                   placeholder="Class"
+                   class="form-control"
+                   id="widget-class"/>
+        </div>
+        <div class="form-group">
+            <label for="widget-heading-text">Text</label>
+            <input ng-if="!model.showHtml"
+                   type="text"
+                   ng-model="model.widget.text"
+                   value="{{model.widget.text}}"
+                   placeholder="Text"
+                   class="form-control"
+                   id="widget-heading-text"/>
+        </div>
+        <div ng-if="model.showSize" class="form-group">
+            <label for="widget-heading-size">Size</label>
+            <input type="text"
+                   ng-model="model.widget.size"
+                   value="{{model.widget.size}}"
+                   placeholder="Size"
+                   class="form-control"
+                   id="widget-heading-size"/>
+        </div>
+        <div ng-if="model.showUrl" class="form-group">
+            <label for="widget-url">URL</label>
+            <input type="text"
+                   ng-model="model.widget.url"
+                   value="{{model.widget.url}}"
+                   placeholder="URL"
+                   class="form-control"
+                   id="widget-url"/>
+        </div>
+        <div ng-if="model.showWidth" class="form-group">
+            <label for="widget-width">Width</label>
+            <input type="number"
+                   ng-model="model.widget.width"
+                   value="{{model.widget.width}}"
+                   placeholder="Width"
+                   max=100
+                   min=1
+                   class="form-control"
+                   id="widget-width"/>
+        </div>
+        <div ng-if="model.showPlaceholder" class="form-group">
+            <label for="widget-placeholder">Placeholder</label>
+            <input type="text"
+                   ng-model="model.widget.placeholder"
+                   value="{{model.widget.placeholder}}"
+                   placeholder="Placeholder"
+                   class="form-control"
+                   id="widget-placeholder"/>
+        </div>
+        <div ng-if="model.showRows" class="form-group">
+            <label for="widget-rows">Rows</label>
+            <input type="number"
+                   ng-model="model.widget.rows"
+                   value={{model.widget.rows}}
+                   min=1
+                   class="form-control"
+                   id="widget-rows"/>
+        </div>
+        <div ng-if="model.showFormatted" class="form-group">
+            <label for="widget-formatted">Formatted</label>
+            <input type="checkbox"
+                   ng-model="model.widget.formatted"
+                   value="{{model.widget.formatted}}"
+                   id="widget-formatted"/>
+        </div>
+        <div ng-if="model.showHtml" ng-model="model.widget.text"
+             text-angular
+             ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+        ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+        ['indent','outdent'],['html']]">
+        </div>
+    </form>
+    <form class="form-with-button" ng-if="model.showUpload" action="/api/upload"  method="post" enctype="multipart/form-data">
+        <input  name="myFile"   type="file" class="form-control"/>
+        <input  name="width"    value="{{model.widget.width}}" style="display: none"/>
+        <input  name="uid"    value="{{model.uid}}" style="display: none"/>
+        <input  name="wid"    value="{{model.wid}}" style="display: none"/>
+        <input  name="pid"    value="{{model.pid}}" style="display: none"/>
+        <input  name="widgetId" value="{{model.widget._id}}"   style="display: none"/>
+        <button type="submit"   class="btn btn-block btn-primary">Upload Image</button>
+    </form>
+    <a ng-if="model.showFlickr"
+       href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{model.wgid}}/flickr"
+       class="btn btn-primary btn-block btn-block"
+       role="button">Search Flickr</a>
+    <a class="btn btn-danger btn-block"
+       ng-click="model.deleteWidget(model.widget)"
+       role="button">Delete</a>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="row navbar-text">
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+                <a href="#/user/{{model.uid}}">
+                    <span class="glyphicon glyphicon-user pull-right icon-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
