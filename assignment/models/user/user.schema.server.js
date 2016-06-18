@@ -7,6 +7,11 @@ module.exports = function () {
         lastName : String,
         email : String,
         phone : String,
+        facebook : {
+            token : String,
+            id : String,
+            displayName : String
+        },
         dateCreated : {type : Date, default : Date.now}
     }, {collection : "assignment.user"});
 

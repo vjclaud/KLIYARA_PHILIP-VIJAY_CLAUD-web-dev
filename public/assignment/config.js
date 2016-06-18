@@ -30,6 +30,15 @@
                     loggedIn : checkLoggedIn
                 }
             })
+            
+            .when("/user", {
+                templateUrl : "views/user/profile.view.client.html",
+                controller : "ProfileViewController",
+                controllerAs : "model",
+                resolve : {
+                    loggedIn : checkLoggedIn
+                }
+            })
 
 
             .when("/user/:uid/website/:wid/page/new", {
@@ -111,7 +120,7 @@
             })
     }
 
-    function checkLoggedIn(UserService, $location, $q) {
+    function checkLoggedIn(UserService, $location, $q, $rootScope ) {
         var deffered = $q.defer();
         UserService
             .loggedIn()
@@ -119,9 +128,11 @@
                 function (response) {
                     var user = response.data;
                     if(user == '0'){
+                        $rootScope.currentUser = null;
                         deffered.reject();
                         $location.url("/login");
                     }else{
+                        $rootScope.currentUser = user;
                         deffered.resolve();
                     }
                     console.log(user);
