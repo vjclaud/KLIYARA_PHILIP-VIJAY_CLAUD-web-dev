@@ -39,7 +39,7 @@
                     loggedIn : checkLoggedIn
                 }
             })
-
+        
 
             .when("/user/:uid/website/:wid/page/new", {
                 templateUrl : "views/page/page-new.view.client.html",
