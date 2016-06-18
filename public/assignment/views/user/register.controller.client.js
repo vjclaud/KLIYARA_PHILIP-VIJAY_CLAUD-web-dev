@@ -16,10 +16,14 @@
                 vm.error = "passwords did not match";
             }else{
                 UserService
-                    .createUserWithUsernameAndPassword(username,password)
-                    .then(function (response) {
+                    .register(username,password)
+                    .then(
+                        function (response) {
                         var user = response.data;
                         $location.url("/user/" + user._id);
+                    },
+                    function (response) {
+                        vm.error = response.data;
                     });
 
 

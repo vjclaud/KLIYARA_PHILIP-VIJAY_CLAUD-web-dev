@@ -25,7 +25,10 @@
             .when("/user/:uid", {
                 templateUrl : "views/user/profile.view.client.html",
                 controller : "ProfileViewController",
-                controllerAs : "model"
+                controllerAs : "model",
+                resolve : {
+                    loggedIn : checkLoggedIn
+                }
             })
 
 
@@ -106,5 +109,27 @@
             .otherwise({
                 redirectTo : "/login"
             })
+    }
+
+    function checkLoggedIn(UserService, $location, $q) {
+        var deffered = $q.defer();
+        UserService
+            .loggedIn()
+            .then(
+                function (response) {
+                    var user = response.data;
+                    if(user == '0'){
+                        deffered.reject();
+                        $location.url("/login");
+                    }else{
+                        deffered.resolve();
+                    }
+                    console.log(user);
+                },
+                function (response) {
+                    $location.url("/login");
+                }
+            )
+        return deffered.promise;
     }
 })();
