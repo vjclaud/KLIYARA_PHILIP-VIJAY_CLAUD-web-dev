@@ -33,14 +33,14 @@ module.exports = function(app, models) {
     passport.use('wam', new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
-    
 
-   // $ rhc env set FACEBOOK_CLIENT_ID="551697491678954" FACEBOOK_CLIENT_SECRET="295edab8eb8daf90de4887ae861c1761" FACEBOOK_CALLBACK_URL="http://webdev-kliyaraphilip.rhcloud.com/auth/facebook/callback" -a App_Name
+
+   // $ rhc env set FACEBOOK_CLIENT_ID="" FACEBOOK_CLIENT_SECRET="" FACEBOOK_CALLBACK_URL="" -a App_Name
 
     var facebookConfig = {
-        clientID     : process.env.FACEBOOK_CLIENT_ID,
-        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+        clientID     : process.env.FACEBOOK_CLIENT_ID ?  process.env.FACEBOOK_CLIENT_ID : "551697491678954",
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET ? process.env.FACEBOOK_CLIENT_SECRET : "clientSecret",
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL ? process.env.FACEBOOK_CALLBACK_URL : "http://localhost:3000/auth/facebook/callback"
     };
 
     passport.use('facebook',new FacebookStrategy(facebookConfig, facebookLogin));
@@ -96,9 +96,16 @@ module.exports = function(app, models) {
             .findUserByUsername(username)
             .then(
                 function(user) {
-                    if(user.username === username && bcrypt.compareSync(password, user.password)) {
-                        return done(null, user);
-                    } else {
+                    var samePassword = bcrypt.compareSync(password, user.password)
+                    if(user){
+                        if(user.username === username && (samePassword === user.password || samePassword)) {
+                            console.log(user);
+                            return done(null, user);
+                        } else {
+                            console.log(user);
+                            return done(null, false);
+                        }
+                    }else {
                         return done(null, false);
                     }
                 },
@@ -125,6 +132,7 @@ module.exports = function(app, models) {
     function register(req, res) {
         var username = req.body['username'];
         var password = req.body['password'];
+        req.body.password = bcrypt.hashSync(password);
         userModel
             .findUserByUsername(username)
             .then(
@@ -159,7 +167,7 @@ module.exports = function(app, models) {
     function getUsers(req, res) {
         var username = req.query['username'];
         var password = req.query['password'];
-
+        password = bcrypt.hashSync(user.password);
         if(username && password){
             findUserByCredentials(username, password, res);
         }else if(username){
@@ -171,7 +179,14 @@ module.exports = function(app, models) {
 
     function login(req, res){
         var user = req.user;
-        res.json(user);
+
+        req.login(user, function (err) {
+            if(err){
+                res.status(400).send(err);
+            }else{
+                res.json(user);
+            }
+        })
 
     }
 

@@ -54,6 +54,11 @@
         }
 
         function updateUser(newUser) {
+            if(vm.profileForm.$invalid){
+                vm.error = "Form containts errors";
+                return;
+            }
+            vm.error = null;
             UserService
                 .updateUser(uid, newUser)
                 .then(
