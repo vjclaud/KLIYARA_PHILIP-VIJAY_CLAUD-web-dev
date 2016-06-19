@@ -54,8 +54,9 @@
         }
 
         function updateUser(newUser) {
+            vm.profileForm.$setSubmitted();
             if(vm.profileForm.$invalid){
-                vm.error = "Form containts errors";
+                vm.error = "Contains invalid fields";
                 return;
             }
             vm.error = null;

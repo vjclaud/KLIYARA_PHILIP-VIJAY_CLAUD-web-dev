@@ -20,7 +20,7 @@
 
 <div class="container">
     <div ng-if ="model.error" class="alert alert-danger" role="alert">{{model.error}}</div>
-    <form>
+    <form   novalidate name="model.form">
         <div class="form-group">
             <label for="widget-heading-name">Name</label>
             <input type="text"
@@ -28,7 +28,9 @@
                    value="{{model.widget.name}}"
                    placeholder="Heading Name"
                    class="form-control"
-                   id="widget-heading-name"/>
+                   ng-class="{true: 'formSubmitted'}[model.form.$submitted]"
+                   id="widget-heading-name"
+                   required/>
         </div>
         <div ng-if="model.showClass" class="form-group">
             <label for="widget-class">Class</label>

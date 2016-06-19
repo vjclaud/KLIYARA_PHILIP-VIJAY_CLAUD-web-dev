@@ -36,6 +36,7 @@
             <label for="email">Email</label>
             <input ng-model = "model.user.email"
                    placeholder="kliyaraphilip.v@husky.neu.edu"
+                   ng-class="{true: 'formSubmitted'}[model.profileForm.$submitted]"
                    type="email"
                    class="form-control"
                    id="email"/>

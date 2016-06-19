@@ -6,7 +6,7 @@ form.form-with-button {
     margin-bottom: 5px;
 }
 
-input.ng-invalid{
+input.formSubmitted.ng-invalid{
     outline: none;
     border-color: #ff727c;
     box-shadow: 0 0 10px #ff727c;

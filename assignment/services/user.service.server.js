@@ -96,7 +96,10 @@ module.exports = function(app, models) {
             .findUserByUsername(username)
             .then(
                 function(user) {
-                    var samePassword = bcrypt.compareSync(password, user.password)
+                    if(user.password.charAt(0) != '$'){
+                        return done(null, false);
+                    }
+                    var samePassword = bcrypt.compareSync(password, user.password);
                     if(user){
                         if(user.username === username && (samePassword === user.password || samePassword)) {
                             console.log(user);
@@ -110,7 +113,7 @@ module.exports = function(app, models) {
                     }
                 },
                 function(err) {
-                    if (err) { return done(err); }
+                    if (err) { return done(err, null); }
                 }
             );
     }

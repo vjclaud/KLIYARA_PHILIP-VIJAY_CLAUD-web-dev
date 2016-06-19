@@ -8,11 +8,13 @@
         vm.registerUser = registerUser;
         
         function registerUser(username, password, rpassword) {
-            if(!username || username.length < 3){
-                vm.error = "username must be at least 3 characters long";
-            }else if(!password || password.length < 3){
-                vm.error = "password must be at least 3 characters long";
-            }else if(password != rpassword){
+
+            vm.registerForm.$setSubmitted();
+            if(vm.registerForm.$invalid){
+                vm.error = "All fields are required";
+                return;
+            }
+            if(password != rpassword){
                 vm.error = "passwords did not match";
             }else{
                 UserService

@@ -23,6 +23,11 @@
         }
 
         function updatePage(page) {
+            vm.form.$setSubmitted();
+            if(vm.form.$invalid){
+                vm.error = "Name is required";
+                return;
+            }
             PageService
                 .updatePage(vm.pid, page)
                 .then(

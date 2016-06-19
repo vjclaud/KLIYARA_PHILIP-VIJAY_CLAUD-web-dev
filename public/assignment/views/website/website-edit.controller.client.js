@@ -22,6 +22,11 @@
         }
 
         function updateWebsite(website) {
+            vm.form.$setSubmitted();
+            if(vm.form.$invalid){
+                vm.error = "Name is required";
+                return;
+            }
             WebsiteService
                 .updateWebsite(vm.wid, website)
                 .then(

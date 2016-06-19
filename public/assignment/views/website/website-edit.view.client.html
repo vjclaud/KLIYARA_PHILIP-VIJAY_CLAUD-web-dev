@@ -19,15 +19,17 @@
 </nav>
 <div class="container">
     <div ng-if ="model.error" class="alert alert-danger" role="alert">{{model.error}}</div>
-    <form>
+    <form novalidate name="model.form">
         <div class="form-group">
             <label for="website-name">Website Name</label>
             <input ng-model = "model.website.name"
                    value="Apple"
+                   ng-class="{true: 'formSubmitted'}[model.form.$submitted]"
                    placeholder="Website Name"
                    type="text"
                    class="form-control"
-                   id="website-name"/>
+                   id="website-name"
+                   required/>
         </div>
         <div class="form-group">
             <label for="website-description">Website Description</label>

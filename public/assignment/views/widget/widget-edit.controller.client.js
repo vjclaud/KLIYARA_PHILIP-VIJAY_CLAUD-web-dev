@@ -53,6 +53,11 @@
         }
 
         function updateWidget(widget) {
+            vm.form.$setSubmitted();
+            if(vm.form.$invalid){
+                vm.error = "Name is required";
+                return;
+            }
             WidgetService
                 .updateWidget(vm.wgid, widget)
                 .then(
