@@ -9,15 +9,23 @@
     var imageUrl = "http://image.tmdb.org/t/p/w500IMAGE_PATH";
     var parameterString = "";
 
+    var searchObject = {
+        searchString : "",
+        year : "",
+        yearType : "After",
+        language : "",
+        ageLock : true
+    };
+
     function TMDBService($http) {
         var api = {
             findMoviesByText : findMoviesByText,
-            findMoviesByParameters : findMoviesByParameters,
-            findWidgetsByPageId : findWidgetsByPageId,
-            findWidgetById : findWidgetById,
-            updateWidget : updateWidget,
-            deleteWidget : deleteWidget,
-            getWidgetTemplates : getWidgetTemplates,
+            discoverMovies : discoverMovies,
+            discoverMoviesByPage : discoverMoviesByPage,
+            findMoviesByTextAndPage : findMoviesByTextAndPage,
+            setSearchObject : setSearchObject,
+            getSearchObject : getSearchObject,
+            resetSearchObject : resetSearchObject,
             searchPhotos : searchPhotos,
             updateWidgetOrder : updateWidgetOrder
         }
@@ -30,9 +38,99 @@
             return $http.get(url);
         }
 
-        function findMoviesByParameters() {
-            var url = discoverUrl.replace("API_KEY", key) + encodeURIComponent(parameterString);
+        function findMoviesByTextAndPage(text, page) {
+            var url = searchUrl.replace("API_KEY", key) + encodeURIComponent(text)+ "&page=" + page;
             return $http.get(url);
+        }
+
+        function hasSearchBeenSet(){
+            if(searchObject
+                && searchObject.searchString == ""
+                && searchObject.year == ""
+                && searchObject.language == "") {
+                 return false;
+            }else if(searchObject){
+                return true;
+            }
+            return false;
+        }
+
+        function getUrlForSearch() {
+            var parameters = "";
+
+
+            if(hasSearchBeenSet()){
+                if(searchObject.searchString != ""){
+
+                    if(searchObject.language != ""){
+                        parameters = parameters + "&language=" + searchObject.language;
+                    }
+
+                    if(searchObject.yearType == "Release Year" && searchObject.year != ""){
+                        parameters = parameters + "&year=" + searchObject.year;
+                    }
+
+                    if(searchObject.ageLock){
+                        parameters = parameters + "&include_adult=false";
+                    }else{
+                        parameters = parameters + "&include_adult=true";
+                    }
+                    return searchUrl.replace("API_KEY", key) + encodeURIComponent(searchObject.searchString) + parameters;
+                }
+
+                if(searchObject.year != ""){
+                    if(searchObject.yearType == "Release Year"){
+                        parameters = parameters + "&year=" + searchObject.year;
+                    }else if(searchObject.yearType == "Before"){
+                        parameters = parameters + "&release_date.lte=" + searchObject.year + "-01-01";
+                    }else{
+                        parameters = parameters + "&release_date.gte=" + searchObject.year + "-01-01";
+                    }
+                }
+
+
+                if(searchObject.ageLock){
+                    parameters = parameters + "&include_adult=false";
+                }else{
+                    parameters = parameters + "&include_adult=true";
+                }
+
+                return discoverUrl.replace("API_KEY", key) + encodeURIComponent(parameterString) + parameters;
+
+            }else{
+                return discoverUrl.replace("API_KEY", key) + encodeURIComponent(parameterString);
+            }
+
+        }
+
+        function discoverMovies() {
+            var url = getUrlForSearch();
+            return $http.get(url);
+        }
+        
+        function discoverMoviesByPage(page) {
+            var url = getUrlForSearch();
+            var url = url + "&page=" + page;
+            return $http.get(url);
+        }
+
+        function setSearchObject(so) {
+            searchObject = so;
+        }
+        
+        function getSearchObject() {
+            return searchObject;
+        }
+
+        function resetSearchObject() {
+            searchObject = {
+                searchString : "",
+                year : "",
+                yearType : "After",
+                language : "",
+                ageLock : true
+            }
+            return searchObject;
         }
 
         function createWidget(pageId, widget) {

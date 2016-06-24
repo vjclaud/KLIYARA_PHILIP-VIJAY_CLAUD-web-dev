@@ -11,7 +11,7 @@
     float: none;
 }
 
-input.form-control {
+.form-control {
     margin-bottom: 5px;
 }
 
@@ -28,6 +28,18 @@ input.formSubmitted.ng-invalid{
 body {
     padding-top: 56px;
     padding-bottom: 56px;
+}
+
+
+
+.padded-message{
+    padding-top: 56px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+div.search {
+    padding-top: 44px;
 }
 
 .icon-left {
@@ -96,3 +108,15 @@ body {
     -webkit-box-orient: vertical;
 }
 
+.white{
+    color: lightblue;
+}
+
+.switch-space{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.switch-label{
+    margin-right: 15px;
+}

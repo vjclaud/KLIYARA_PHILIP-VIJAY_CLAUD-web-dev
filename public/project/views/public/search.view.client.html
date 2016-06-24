@@ -1,3 +1,23 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">
+                Search Movies
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click = ""
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-menu-hamburger icon-right"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+
+
+
+
 <div class="container">
     <div ng-if ="model.error" class="alert alert-danger" role="alert">
         <button ng-click="model.error = null" type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -10,59 +30,65 @@
         </button>
         {{model.message}}
     </div>
-    <div class="input-group col-xs-12 vj-padded">
-        <input type="text"
-               ng-model="searchString"
-               class="search-query form-control"
-               placeholder="Search" />
-        <span class="input-group-btn">
-            <button ng-click="model.search(searchString)" class="btn btn-success" type="button">
-                <span class=" glyphicon glyphicon-search"></span>
-            </button>
-        </span>
-    </div>
-    <div ng-repeat ="movie in model.tmdbData.results"
-         ng-if="movie.poster_path"
-         class="vj-padded outerdiv">
-        <div ng-if="movie.poster_path" class="row row-padded">
-            <div id="poster" class="col-xs-4 min-size-image">
-                <img width="100%"
-                     ng-src="{{model.tmdbImageUrl + movie.poster_path}}"
-                     class="thumbnail min-size-image fill">
-                </img>
+    <div>
+        <form>
+            <div class="input-group col-xs-12 vj-padded">
+                <input type="text"
+                       ng-model="model.searchObject.searchString"
+                       class="search-query form-control"
+                       placeholder="Search" />
+            <span class="input-group-btn">
+                <button ng-click="model.search()" class="btn btn-primary" type="button">
+                    <span class=" glyphicon glyphicon-search"></span>
+                </button>
+            </span>
             </div>
-            <div class="col-xs-8" style='overflow:hidden !important;'>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>
-                            {{movie.title + ' (' + movie.release_date.substring(0,4) + ')'}}
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td id="tabRow">
-                            <div id="overview" class="limit-text">
-                                {{movie.overview}}
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+            <label for="yearPicker">Date</label>
+            <select name="date"
+                    id="date"
+                    ng-model="model.searchObject.yearType"
+                    class="form-control">
+                <option selected="selected">After</option>
+                <option>Before</option>
+                <option>Release Year</option>
+            </select>
+            <select name="yearPicker"
+                    id="yearPicker"
+                    ng-model="model.searchObject.year"
+                    class="form-control">
+            </select>
+            <label for="languagePicker">Language</label>
+            <select name="languagePicker"
+                    id="languagePicker"
+                    ng-model="model.searchObject.language"
+                    class="form-control">
+            </select>
+            <div for="ageLock" class="switch-space">
+                <input type="checkbox"
+                       ng-model="model.searchObject.ageLock"
+                       name="ageLock"
+                       id="ageLock">
+                <label class="switch-label" for="ageLock">Age Lock</label>
             </div>
-        </div>
+            <a class="btn btn-danger btn-block"
+               ng-click="model.reset()"
+               role="button">Reset</a>
+            <a class="btn btn-primary btn-block"
+               ng-click="model.search()"
+               role="button">Search</a>
+        </form>
     </div>
 </div>
-<nav class="navbar navbar-default  navbar-fixed-bottom">
+<nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
-        <div class="text-center">
-            <a class="btn btn-primary btn-block navbar-btn"
-               type="submit"
-               ng-click="model.search(searchString)"
-               role="button">
-                Filtered Suggestions
-            </a>
+        <div class="row navbar-text">
+            <div class="col-xs-12">
+                <a href="#">
+                    <span class="pull-left">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </span>
+                </a>
+            </div>
         </div>
     </div>
 </nav>
