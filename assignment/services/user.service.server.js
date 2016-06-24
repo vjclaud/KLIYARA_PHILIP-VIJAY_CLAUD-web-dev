@@ -96,6 +96,9 @@ module.exports = function(app, models) {
             .findUserByUsername(username)
             .then(
                 function(user) {
+                    if(user == null){
+                        return done(null, false);
+                    }
                     if(user.password.charAt(0) != '$'){
                         return done(null, false);
                     }

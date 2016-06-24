@@ -1,0 +1,61 @@
+<div class="container">
+    <div ng-if ="model.error" class="alert alert-danger" role="alert">
+        <button ng-click="model.error = null" type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{model.error}}</div>
+    <div ng-if="model.message" class="alert alert-success alert-dismissible" role="alert">
+        <button ng-click="model.message = null" type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{model.message}}
+    </div>
+    <div ng-repeat ="movie in model.tmdbData.results"
+         ng-if="movie.poster_path"
+         class="vj-padded"
+         view-resize>
+        <div ng-if="movie.poster_path" class="row row-padded">
+            <div class="col-xs-4 min-size-image">
+                <img width="100%"
+                     id="poster"
+                     ng-src="{{model.tmdbImageUrl + movie.poster_path}}"
+                     class="thumbnail min-size-image"
+                     imageonload>
+                </img>
+            </div>
+            <div class="col-xs-8">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            {{movie.title + ' (' + movie.release_date.substring(0,4) + ')'}}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div id="overview" class="limit-text">
+                                {{model.getLimitedText(movie.overview)}}
+                            </div>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<nav class="navbar navbar-default  navbar-fixed-bottom">
+    <div class="container">
+        <div class="text-center">
+            <a class="btn btn-primary btn-block navbar-btn"
+               type="submit"
+               ng-click="model.search(searchString)"
+               role="button">
+                Filtered Suggestions
+            </a>
+        </div>
+    </div>
+</nav>

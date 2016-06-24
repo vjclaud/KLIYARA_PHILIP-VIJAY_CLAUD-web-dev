@@ -1,3 +1,3 @@
 (function () {
-    angular.module("MovieSuggester", ["ngRoute", "textAngular"]);
+    angular.module("MovieSuggester", ["ngRoute", "textAngular", "viewResize"]);
 })();
