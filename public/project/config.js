@@ -23,6 +23,12 @@
                 controllerAs : "model"
             })
 
+            .when("/views/public/detail/:mid", {
+                templateUrl : "views/public/detail.view.client.html",
+                controller : "DetailViewController",
+                controllerAs : "model"
+            })
+
             .when("/views/public/search", {
                 templateUrl : "views/public/search.view.client.html",
                 controller : "SearchViewController",

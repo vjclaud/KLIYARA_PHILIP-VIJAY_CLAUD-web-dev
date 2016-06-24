@@ -6,8 +6,8 @@
     var key = "4eff5a432c614a57e1c9704c95d67ee5";
     var discoverUrl = "http://api.themoviedb.org/3/discover/movie?api_key=API_KEY";
     var searchUrl = "http://api.themoviedb.org/3/search/movie?api_key=API_KEY&query=";
+    var findUrl = "https://api.themoviedb.org/3/movie/MOVIE_ID?api_key=API_KEY";
     var imageUrl = "http://image.tmdb.org/t/p/w500IMAGE_PATH";
-    var parameterString = "";
 
     var searchObject = {
         searchString : "",
@@ -26,12 +26,19 @@
             setSearchObject : setSearchObject,
             getSearchObject : getSearchObject,
             resetSearchObject : resetSearchObject,
-            searchPhotos : searchPhotos,
+            getMovieById : getMovieById,
             updateWidgetOrder : updateWidgetOrder
         }
 
 
         return api;
+
+
+        function getMovieById(id) {
+            var url = findUrl.replace("API_KEY", key);
+            url = url.replace("MOVIE_ID", id);
+            return $http.get(url);
+        }
 
         function findMoviesByText(text) {
             var url = searchUrl.replace("API_KEY", key) + encodeURIComponent(text);
@@ -62,6 +69,7 @@
             if(hasSearchBeenSet()){
                 if(searchObject.searchString != ""){
 
+                    searchObject.searchString = encodeURIComponent(searchObject.searchString);
                     if(searchObject.language != ""){
                         parameters = parameters + "&language=" + searchObject.language;
                     }
@@ -95,10 +103,10 @@
                     parameters = parameters + "&include_adult=true";
                 }
 
-                return discoverUrl.replace("API_KEY", key) + encodeURIComponent(parameterString) + parameters;
+                return discoverUrl.replace("API_KEY", key) + parameters;
 
             }else{
-                return discoverUrl.replace("API_KEY", key) + encodeURIComponent(parameterString);
+                return discoverUrl.replace("API_KEY", key);
             }
 
         }

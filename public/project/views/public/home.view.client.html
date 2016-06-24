@@ -39,7 +39,7 @@
              class="vj-padded"
              view-resize>
             <div ng-if="movie.poster_path" class="row row-padded">
-                <div class="col-xs-4 min-size-image">
+                <div ng-click="model.viewMovie(movie)" class="col-xs-4 min-size-image">
                     <img width="100%"
                          id="poster"
                          ng-src="{{model.tmdbImageUrl + movie.poster_path}}"
@@ -47,7 +47,7 @@
                          imageonload>
                     </img>
                 </div>
-                <div class="col-xs-8">
+                <div ng-click="model.viewMovie(movie)" class="col-xs-8">
                     <table class="table">
                         <thead>
                         <tr>

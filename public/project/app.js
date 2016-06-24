@@ -1,3 +1,3 @@
 (function () {
-    angular.module("MovieSuggester", ["ngRoute", "textAngular", "viewResize", "infinite-scroll"]);
+    angular.module("MovieSuggester", ["ngRoute", "textAngular", "viewResize", "infinite-scroll", "keepScrollPos"]);
 })();

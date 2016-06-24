@@ -34,6 +34,7 @@
           rel="stylesheet"/>
     <script src="../directive/wdSortable.js"></script>
     <script src="../directive/viewResize.js"></script>
+    <script src="../directive/keepScrollPos.js"></script>
     <script src="app.js"></script>
     <script src="config.js"></script>
 
@@ -41,11 +42,12 @@
 
     <script src="views/public/home.controller.client.js"></script>
     <script src="views/public/search.controller.client.js"></script>
+    <script src="views/public/detail.controller.client.js"></script>
 
 
     <script src="services/tmdb.service.client.js"></script>
 </head>
 <body>
-<div ng-view></div>
+<div ng-view keep-scroll-pos></div>
 </body>
 </html>

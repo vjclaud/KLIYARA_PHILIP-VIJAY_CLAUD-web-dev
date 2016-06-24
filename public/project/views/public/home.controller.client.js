@@ -13,6 +13,7 @@
         vm.getLang = getLang;
         vm.myPagingFunction = myPagingFunction;
         vm.displayLoginMessage = displayLoginMessage;
+        vm.viewMovie = viewMovie;
 
         init();
 
@@ -37,6 +38,10 @@
                         console.log(err);
                     }
                 );
+        }
+
+        function viewMovie(movie) {
+            $location.url("/views/public/detail/" + movie.id);
         }
 
         function displayLoginMessage() {
@@ -72,7 +77,7 @@
         }
 
         function getLang(lang) {
-            if(getLang){
+            if(isoLangs[lang]){
                 var language = isoLangs[lang];
                 if(language && language.name){
                     return " " + language.name;
