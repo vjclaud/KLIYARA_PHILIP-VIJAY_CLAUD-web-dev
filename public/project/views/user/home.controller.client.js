@@ -1,9 +1,9 @@
 (function () {
     angular
         .module("MovieSuggester")
-        .controller("HomeViewController", HomeViewController);
+        .controller("UserHomeViewController", UserHomeViewController);
 
-    function HomeViewController($location, TMDBService, $timeout) {
+    function UserHomeViewController($location, TMDBService, $timeout, $routeParams, MUserService) {
         var vm = this;
         var page = 0;
         var busy = false;
@@ -14,12 +14,19 @@
         vm.myPagingFunction = myPagingFunction;
         vm.displayLoginMessage = displayLoginMessage;
         vm.viewMovie = viewMovie;
+        uid = $routeParams['uid'];
 
         init();
 
         function init() {
             page = 1;
             busy = true;
+
+            MUserService
+                .findUserById(uid)
+                .then(function (response) {
+                    vm.user = response.data;
+                });
 
             TMDBService
                 .discoverMovies()
@@ -41,9 +48,10 @@
         }
 
         function viewMovie(movie) {
-            if(movie){
-                $location.url("/detail/" + movie.id);
+            if(vm.user && movie){
+                $location.url("/user/" + vm.user._id + "/detail/" + movie.id);
             }
+
         }
 
         function displayLoginMessage() {

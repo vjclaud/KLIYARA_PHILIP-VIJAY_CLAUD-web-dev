@@ -1,9 +1,9 @@
 (function () {
     angular
-        .module("WebAppMaker")
+        .module("MovieSuggester")
         .controller("LoginViewController", LoginViewController);
 
-    function LoginViewController($location, UserService) {
+    function LoginViewController($location, MUserService) {
 
         vm = this;
         vm.login = function (username, password) {
@@ -11,9 +11,8 @@
             if(vm.loginForm.$invalid){
                 vm.error = "Fields can not be empty";
                 return;
-            };
-            
-            UserService
+            }
+            MUserService
                 .login(username, password)
                 .then(
                     function (response) {

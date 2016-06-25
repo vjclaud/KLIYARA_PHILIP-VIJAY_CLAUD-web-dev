@@ -17,9 +17,9 @@ var baseSearchObject = {
 (function () {
     angular
         .module("MovieSuggester")
-        .controller("SearchViewController", SearchViewController);
+        .controller("UserSearchViewController", UserSearchViewController);
 
-    function SearchViewController($location, TMDBService) {
+    function UserSearchViewController($location, TMDBService, $routeParams, MUserService) {
         var vm = this;
         vm.search = search;
         var page = 0;
@@ -31,10 +31,17 @@ var baseSearchObject = {
         vm.myPagingFunction = myPagingFunction;
         vm.searchObject = TMDBService.getSearchObject();
         vm.reset = reset;
+        uid = $routeParams['uid'];
 
         init();
 
         function init() {
+
+            MUserService
+                .findUserById(uid)
+                .then(function (response) {
+                    vm.user = response.data;
+                });
 
             var i;
             for (i = new Date().getFullYear(); i > 1900; i--)
@@ -52,7 +59,10 @@ var baseSearchObject = {
             page = 1;
             busy = true;
             TMDBService.setSearchObject(vm.searchObject);
-            $location.url("/home");
+            if(vm.user){
+                $location.url("/user/" + vm.user._id);
+            }
+            
         }
 
         function getLang(lang) {

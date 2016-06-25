@@ -1,13 +1,8 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
             <a class="navbar-brand">
-                Discover Movies
+                User Home
             </a>
-            <p class="navbar-text pull-right">
-                <a href="#/login">
-                    <span class="glyphicon glyphicon-log-in icon-right"></span>
-                </a>
-            </p>
     </div>
 </nav>
 <nav ng-if="model.loginMessage" class="navbar-fixed-top">
@@ -95,7 +90,7 @@
             </a>
         </p>
         <p class="navbar-text pull-right">
-            <a href="#/search">
+            <a href="#/user/{{model.user._id}}/search">
                 <span class="glyphicon glyphicon-search icon-right"></span>
             </a>
         </p>

@@ -1,13 +1,8 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <p class="navbar-text pull-left">
-            <a href="#/home">
+            <a href="#/user/{{model.user._id}}">
                 <span class="glyphicon glyphicon-chevron-left icon-left"></span>
-            </a>
-        </p>
-        <p class="navbar-text pull-right">
-            <a href="#/login">
-                <span class="glyphicon glyphicon-log-in icon-right"></span>
             </a>
         </p>
     </div>
@@ -79,12 +74,12 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
         <p class="navbar-text pull-left">
-            <a href="#/home">
+            <a href="#/user/{{model.user._id}}">
                 <span class="glyphicon glyphicon-home icon-left"></span>
             </a>
         </p>
         <p class="navbar-text pull-right">
-            <a href="#/search">
+            <a href="#/user/{{model.user._id}}/search">
                 <span class="glyphicon glyphicon-search icon-right"></span>
             </a>
         </p>

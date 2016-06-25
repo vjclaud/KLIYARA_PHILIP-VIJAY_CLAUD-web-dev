@@ -1,18 +1,50 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <p class="navbar-text pull-left">
+            <a href="#/home">
+                <span class="glyphicon glyphicon-chevron-left icon-left"></span>
+            </a>
+        </p>
+    </div>
+</nav>
+
 <div class="container">
     <div ng-if ="model.error" class="alert alert-danger" role="alert">{{model.error}}</div>
     <h1>Login</h1>
-    <input ng-model="username"
-           placeholder="username"
-           type="text"
-           class="form-control"/>
-    <input ng-model="password"
-           placeholder="password"
-           type="password"
-           class="form-control"/>
-    <a class="btn btn-primary btn-block"
-       href="#/profile"
-       role="button">Login</a>
-    <a class="btn btn-success btn-block"
-       href="#/register"
-       role="button">Register</a>
+    <form novalidate name="model.loginForm">
+        <input ng-model="username"
+               ng-class="{true: 'formSubmitted'}[model.loginForm.$submitted]"
+               placeholder="username"
+               type="text"
+               class="form-control"
+               required/>
+        <input ng-model="password"
+               ng-class="{true: 'formSubmitted'}[model.loginForm.$submitted]"
+               placeholder="password"
+               type="password"
+               class="form-control"
+               required/>
+        <a class="btn btn-primary btn-block"
+           type="submit"
+           ng-click="model.login(username, password)"
+           role="button">Login</a>
+        <a class="btn btn-primary btn-block"
+           href="/auth/facebook"
+           role="button">
+            <span class="fa fa-facebook-official"></span>
+            Facebook</a>
+        <a class="btn btn-success btn-block"
+           href="#/register"
+           role="button">Register</a>
+    </form>
 </div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <p class="navbar-text pull-left">
+            <a href="#/home">
+                <span class="glyphicon glyphicon-home icon-left"></span>
+            </a>
+        </p>
+    </div>
+</nav>
