@@ -17,12 +17,12 @@
         vm.addMovieToDislikeList = addMovieToDislikeList;
         vm.addMovieToWatchList = addMovieToWatchList;
         vm.addMovieToLikeList = addMovieToLikeList;
-        
 
         init();
 
 
         function changeList(listType) {
+
             switch (parseInt(listType))
             {
                 case 1:
@@ -100,53 +100,39 @@
             switch (parseInt(vm.lid))
             {
                 case 1:
-                    MUserService
-                        .removeMovieFromLikeList(uid, movie)
-                        .then(
-                            function (response) {
-                                console.log(response.data);
-                            },
-                            function (error) {
-                                console.log(error);
-                            }
-                        );
                     delete vm.user.likeList[movie.id];
                     break;
 
                 case 2:
-                    MUserService
-                        .removeMovieFromDislikeList(uid, movie)
-                        .then(
-                            function (response) {
-                                console.log(response.data);
-                            },
-                            function (error) {
-                                console.log(error);
-                            }
-                        );
                     delete vm.user.dislikeList[movie.id];
                     break;
 
                 default:
-                    MUserService
-                        .removeMovieFromWatchList(uid, movie)
-                        .then(
-                            function (response) {
-                                console.log(response.data);
-                            },
-                            function (error) {
-                                console.log(error);
-                            }
-                        );
 
                     delete vm.user.watchList[movie.id];
             }
+            MUserService
+                .updateUser(uid, vm.user)
+                .then(
+                    function (response) {
+                        console.log("Movies updated");
+                    },
+                    function () {
+                        console.log("Couldn't update movies");
+                    }
+                );
         }
+        
 
 
         function addMovieToDislikeList($event, $index, movie) {
 
-            if(vm.user.dislikeList[movie.id]==null){
+            if(vm.user.dislikeList){
+                if(vm.user.dislikeList[movie.id]==null){
+                    vm.user.dislikeList[movie.id] = angular.copy(movie);
+                }
+            }else{
+                vm.user.dislikeList = {};
                 vm.user.dislikeList[movie.id] = angular.copy(movie);
             }
 
@@ -162,23 +148,20 @@
                 element.effect( "transfer", { to: $( "#dislikes" ) }, 400 );
             }
 
-            MUserService
-                .addMovieToDislikeList(uid, movieCopy)
-                .then(
-                    function (response) {
-                        callRemoveMovieWithMovie(movieCopy);
-                    },
-                    function (error) {
-                        console.log(error);
-                    }
-                );
+            callRemoveMovieWithMovie(movieCopy);
         }
 
         function addMovieToWatchList($event, $index, movie){
 
-            if(vm.user.watchList[movie.id]==null){
+            if(vm.user.watchList){
+                if(vm.user.watchList[movie.id]==null){
+                    vm.user.watchList[movie.id] = angular.copy(movie);
+                }
+            }else{
+                vm.user.watchList = {};
                 vm.user.watchList[movie.id] = angular.copy(movie);
             }
+
 
 
             var movieCopy = angular.copy(movie);
@@ -191,21 +174,19 @@
                 var element = $("#" + $event.target.id.substring(2));
                 element.effect( "transfer", { to: $( "#watchlist" ) }, 400 );
             }
-            MUserService
-                .addMovieToWatchList(uid, movieCopy)
-                .then(
-                    function (response) {
-                        callRemoveMovieWithMovie(movieCopy);
-                    },
-                    function (error) {
-                        console.log(error);
-                    }
-                );
+
+            callRemoveMovieWithMovie(movieCopy);
         }
 
         function addMovieToLikeList($event, $index, movie){
 
-            if(vm.user.likeList[movie.id]==null){
+
+            if(vm.user.likeList){
+                if(vm.user.likeList[movie.id]==null){
+                    vm.user.likeList[movie.id] = angular.copy(movie);
+                }
+            }else{
+                vm.user.likeList = {};
                 vm.user.likeList[movie.id] = angular.copy(movie);
             }
 
@@ -213,23 +194,14 @@
             if(vm.movies){
                 vm.movies.splice($index, 1);
             }
+
+            callRemoveMovieWithMovie(movieCopy);
             
 
             if($event && $event.target.id){
                 var element = $("#" + $event.target.id.substring(2));
                 element.effect( "transfer", { to: $( "#likes" ) }, 400 );
             }
-
-            MUserService
-                .addMovieToLikeList(uid, movieCopy)
-                .then(
-                    function (response) {
-                        callRemoveMovieWithMovie(movieCopy);
-                    },
-                    function (error) {
-                        console.log(error);
-                    }
-                );
         }
 
         function displayLoginMessage() {

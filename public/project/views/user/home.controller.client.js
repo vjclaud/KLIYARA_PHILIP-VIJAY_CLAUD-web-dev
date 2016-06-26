@@ -43,25 +43,78 @@
                         vm.movieList  = $.extend({}, vm.movieList, vm.user.dislikeList);
                     }
 
+
+                    TMDBService
+                        .discoverMovies()
+                        .then(
+                            function (response) {
+                                busy = false;
+                                vm.tmdbData = response.data;
+                                if(response.data.total_pages){
+                                    totalPages = response.data.total_pages;
+                                }
+                                var tempMovies  = [];
+                                if(vm.tmdbData.results.length >= 20){
+                                    for (var key in vm.tmdbData.results){
+                                        var movie = vm.tmdbData.results[key];
+                                        if(vm.movieList[movie.id] == null){
+                                            tempMovies.push(movie);
+                                        }
+                                    }
+
+                                    vm.tmdbData.results = tempMovies;
+
+                                    if(tempMovies.length < 20){
+                                        myPagingFunction();
+                                    }
+                                }
+
+                                console.log(response);
+                            },
+                            function (err) {
+                                busy = false;
+                                console.log(err);
+                            }
+                        );
+
+                },
+                function (err) {
+                    TMDBService
+                        .discoverMovies()
+                        .then(
+                            function (response) {
+                                busy = false;
+                                vm.tmdbData = response.data;
+                                if(response.data.total_pages){
+                                    totalPages = response.data.total_pages;
+                                }
+
+                                var tempMovies  = [];
+                                if(vm.tmdbData.results.length >= 20){
+                                    for (var key in vm.tmdbData.results){
+                                        var movie = vm.tmdbData.results[key];
+                                        if(vm.movieList[movie.id] == null){
+                                            tempMovies.push(movie);
+                                        }
+                                    }
+
+                                    vm.tmdbData.results = tempMovies;
+
+                                    if(tempMovies.length < 20){
+                                        myPagingFunction();
+                                    }
+                                }
+
+                                console.log(response);
+                            },
+                            function (err) {
+                                busy = false;
+                                console.log(err);
+                            }
+                        );
                 });
 
-            TMDBService
-                .discoverMovies()
-                .then(
-                    function (response) {
-                        busy = false;
-                        vm.tmdbData = response.data;
-                        if(response.data.total_pages){
-                            totalPages = response.data.total_pages;
-                        }
 
-                        console.log(response);
-                    },
-                    function (err) {
-                        busy = false;
-                        console.log(err);
-                    }
-                );
         }
 
         function viewMovie(movie) {
@@ -72,44 +125,123 @@
         }
 
         function addMovieToDislikeList($event, $index, movie) {
+            movie = getSmallMovie(movie);
+            var movieCopy = angular.copy(movie);
+            vm.tmdbData.results.splice($index, 1);
+
+            if(vm.tmdbData.results.length < 4){
+                myPagingFunction()
+            }
+
+            if(vm.user.dislikeList){
+                if(vm.user.dislikeList[movieCopy.id]==null){
+                    vm.user.dislikeList[movieCopy.id] = angular.copy(movieCopy);
+                }
+            }else{
+                vm.user.dislikeList = {};
+                vm.user.dislikeList[movieCopy.id] = angular.copy(movieCopy);
+            }
+
+
             if($event && $event.target.id){
                 $( "#" + $event.target.id.substring(2) ).toggle("blind");
             }
+
             MUserService
-                .addMovieToDislikeList(uid, movie)
+                .updateUser(uid, vm.user)
                 .then(
                     function (response) {
-                        console.log(response.data);
+                        console.log("Movies updated");
                     },
-                    function (error) {
-                        console.log(error);
+                    function () {
+                        console.log("Couldn't update movies");
                     }
                 );
         }
 
         function addMovieToWatchList($event, $index, movie){
+            movie = getSmallMovie(movie);
             var movieCopy = angular.copy(movie);
             vm.tmdbData.results.splice($index, 1);
+
+            if(vm.tmdbData.results.length < 4){
+                myPagingFunction()
+            }
+
+            if(vm.user.watchList){
+                if(vm.user.watchList[movieCopy.id]==null){
+                    vm.user.watchList[movieCopy.id] = angular.copy(movieCopy);
+                }
+            }else{
+                vm.user.watchList = {};
+                vm.user.watchList[movieCopy.id] = angular.copy(movieCopy);
+            }
 
             if($event && $event.target.id){
                 var element = $("#" + $event.target.id.substring(2));
                 element.effect( "transfer", { to: $( "#listLocation" ) }, 400 );
             }
             MUserService
-                .addMovieToWatchList(uid, movieCopy)
+                .updateUser(uid, vm.user)
                 .then(
                     function (response) {
-                        console.log(response.data);
+                        console.log("Movies updated");
                     },
-                    function (error) {
-                        console.log(error);
+                    function () {
+                        console.log("Couldn't update movies");
                     }
                 );
         }
 
+
+        function getSmallMovie(movie){
+            if(movie){
+
+                var newMovie = {
+                    id : movie.id,
+                    title : movie.title
+                }
+                if(movie.overview){
+                    newMovie['overview'] = movie.overview;
+                }
+
+                if(movie.poster_path){
+                    newMovie['poster_path'] = movie.poster_path;
+                }
+
+                if(movie.original_language){
+                    newMovie['original_language'] = movie.original_language;
+                }
+
+                if(movie.release_date){
+                    newMovie['release_date'] = movie.release_date;
+                }
+
+                return newMovie;
+
+            }else{
+                return movie;
+            }
+        }
+
         function addMovieToLikeList($event, $index, movie){
+
+            movie = getSmallMovie(movie);
             var movieCopy = angular.copy(movie);
             vm.tmdbData.results.splice($index, 1);
+
+            if(vm.tmdbData.results.length < 4){
+                myPagingFunction()
+            }
+
+            if(vm.user.likeList){
+                if(vm.user.likeList[movieCopy.id]==null){
+                    vm.user.likeList[movieCopy.id] = angular.copy(movieCopy);
+                }
+            }else{
+                vm.user.likeList = {};
+                vm.user.likeList[movieCopy.id] = angular.copy(movieCopy);
+            }
 
             if($event && $event.target.id){
                 var element = $("#" + $event.target.id.substring(2));
@@ -117,13 +249,13 @@
             }
 
             MUserService
-                .addMovieToLikeList(uid, movieCopy)
+                .updateUser(uid, vm.user)
                 .then(
                     function (response) {
-                        console.log(response.data);
+                        console.log("Movies updated");
                     },
-                    function (error) {
-                        console.log(error);
+                    function () {
+                        console.log("Couldn't update movies");
                     }
                 );
         }
@@ -144,6 +276,22 @@
                                     busy = false;
                                     if(response.data.results && vm.tmdbData.results){
                                         vm.tmdbData.results = vm.tmdbData.results.concat(response.data.results);
+                                    }
+
+                                    var tempMovies  = [];
+                                    if(vm.tmdbData.results.length >= 20){
+                                        for (var key in vm.tmdbData.results){
+                                            var movie = vm.tmdbData.results[key];
+                                            if(vm.movieList[movie.id] == null){
+                                                tempMovies.push(movie);
+                                            }
+                                        }
+
+                                        vm.tmdbData.results = tempMovies;
+
+                                        if(tempMovies.length < 20){
+                                            myPagingFunction();
+                                        }
                                     }
                                 },
                                 function (err) {
