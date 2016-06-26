@@ -11,12 +11,23 @@
         vm.displayLoginMessage = displayLoginMessage;
         vm.mid = $routeParams['mid'];
         vm.uid = $routeParams['uid'];
-        var lid = $routeParams['lid'];
+        vm.lid = $routeParams['lid'];
+        vm.pid = $routeParams['pid'];
         vm.backPressed = backPressed;
         vm.removeFromAllLists = removeFromAllLists;
 
         $(document).ready(function () {
-            if(window.location.href.indexOf("list/") > -1) {
+
+
+            if(window.location.href.indexOf("following/") > -1) {
+                vm.followingList = true;
+                vm.title = "Following";
+                vm.showRemove = false;
+            }else if(window.location.href.indexOf("person/") > -1) {
+                vm.title = "Find People";
+                vm.personList = true;
+                vm.showRemove = false;
+            }else if(window.location.href.indexOf("list/") > -1) {
                 vm.backToList = true;
                 vm.showRemove = true;
             }
@@ -89,11 +100,20 @@
 
         function backPressed() {
             if(vm.backToList){
-                $location.url("/user/" + vm.uid + "/list/" + lid);
-            }else{
+                $location.url("/user/" + vm.uid + "/list/" + vm.lid);
+            }else if(vm.personList){
+                var url = "/user/" + vm.uid + "/person/" + vm.pid + "/list/" + vm.lid;
+                $location.url(url);
+            }else if(vm.followingList){
+                var url = "/user/" + vm.uid + "/following/" + vm.pid + "/list/" + vm.lid;
+                $location.url(url);
+            }
+            else{
                 $location.url("/user/" + vm.uid);
             }
         }
+
+
         
         function init() {
 

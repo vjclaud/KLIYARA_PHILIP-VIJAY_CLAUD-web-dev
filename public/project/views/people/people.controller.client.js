@@ -13,6 +13,9 @@
         $(document).ready(function () {
             if(window.location.href.indexOf("/following") > -1) {
                 vm.followingList = true;
+                vm.title = "Following";
+            }else{
+                vm.title = "Find People";
             }
         });
 

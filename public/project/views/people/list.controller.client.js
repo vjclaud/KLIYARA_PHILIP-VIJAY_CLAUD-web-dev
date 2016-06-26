@@ -18,12 +18,14 @@
         vm.addMovieToDislikeList = addMovieToDislikeList;
         vm.addMovieToWatchList = addMovieToWatchList;
         vm.addMovieToLikeList = addMovieToLikeList;
+        var listOwnerName = "";
 
         init();
 
         $(document).ready(function () {
             if(window.location.href.indexOf("/following") > -1) {
                 vm.followingList = true;
+            }else{
             }
         });
         
@@ -42,7 +44,7 @@
                     }
 
                     vm.movies = arr;
-                    vm.title = "Favorites";
+                    vm.title = listOwnerName + "Favorites";
 
                     $("#likes").addClass("white");
                     $("#dislikes").removeClass("white");
@@ -51,7 +53,7 @@
 
                 case 2:
                     vm.lid = listType;
-                    vm.title = "Dislikes";
+                    vm.title = listOwnerName + "Dislikes";
 
                     var arr = [];
                     if(vm.person.dislikeList){
@@ -67,7 +69,7 @@
 
                 default:
                     vm.lid = listType;
-                    vm.title = "Watch List";
+                    vm.title = listOwnerName + "Watch List";
 
                     var arr = [];
                     if(vm.person.watchList){
@@ -95,13 +97,23 @@
                 .then(function (response) {
                     vm.person = response.data;
                     changeList(vm.lid);
+                    if(vm.person.firstName){
+                        listOwnerName = vm.person.firstName + "'s ";
+                    }else{
+                        listOwnerName = vm.person.username + "'s ";
+                    }
 
+                    vm.title = listOwnerName + vm.title;
                 });
 
         }
 
         function viewMovie(movie) {
-            if(vm.uid && vm.pid && movie){
+            if(vm.uid && vm.pid && movie && vm.followingList){
+                $location.url("/user/" + vm.uid + "/following/" + vm.pid + "/list/"+ vm.lid +"/detail/" + movie.id);
+            }
+
+            if(vm.uid && vm.pid && movie && !vm.followingList){
                 $location.url("/user/" + vm.uid + "/person/" + vm.pid + "/list/"+ vm.lid +"/detail/" + movie.id);
             }
 

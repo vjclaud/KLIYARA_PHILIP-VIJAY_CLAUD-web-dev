@@ -67,17 +67,14 @@
 
             })
 
-            .when("/user/:uid/person/:pid/list/:lid", {
+            .when("/user/:uid/following/:pid/list/:lid", {
                 templateUrl : "views/people/list.view.client.html",
                 controller : "PersonListViewController",
-                controllerAs : "model",
-                resolve : {
-                    loggedIn : checkLoggedIn
-                }
+                controllerAs : "model"
 
             })
 
-            .when("/user/:uid/following/:pid/list/:lid", {
+            .when("/user/:uid/person/:pid/list/:lid", {
                 templateUrl : "views/people/list.view.client.html",
                 controller : "PersonListViewController",
                 controllerAs : "model",
@@ -94,6 +91,18 @@
             })
 
             .when("/user/:uid/list/:lid/detail/:mid", {
+                templateUrl : "views/user/detail.view.client.html",
+                controller : "UserDetailViewController",
+                controllerAs : "model"
+            })
+
+            .when("/user/:uid/following/:pid/list/:lid/detail/:mid", {
+                templateUrl : "views/user/detail.view.client.html",
+                controller : "UserDetailViewController",
+                controllerAs : "model"
+            })
+
+            .when("/user/:uid/person/:pid/list/:lid/detail/:mid", {
                 templateUrl : "views/user/detail.view.client.html",
                 controller : "UserDetailViewController",
                 controllerAs : "model"
