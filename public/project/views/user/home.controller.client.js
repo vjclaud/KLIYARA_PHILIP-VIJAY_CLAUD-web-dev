@@ -17,7 +17,7 @@
         vm.addMovieToLikeList = addMovieToLikeList;
         vm.viewMovie = viewMovie;
         vm.movieList = null;
-        var uid = $routeParams['uid'];
+        vm.uid = $routeParams['uid'];
 
         init();
 
@@ -26,7 +26,7 @@
             busy = true;
 
             MUserService
-                .findUserById(uid)
+                .findUserById(vm.uid)
                 .then(function (response) {
                     vm.user = response.data;
                     vm.movieList = {};
@@ -148,7 +148,7 @@
             }
 
             MUserService
-                .updateUser(uid, vm.user)
+                .updateUser(vm.uid, vm.user)
                 .then(
                     function (response) {
                         console.log("Movies updated");
@@ -182,7 +182,7 @@
                 element.effect( "transfer", { to: $( "#listLocation" ) }, 400 );
             }
             MUserService
-                .updateUser(uid, vm.user)
+                .updateUser(vm.uid, vm.user)
                 .then(
                     function (response) {
                         console.log("Movies updated");
@@ -249,7 +249,7 @@
             }
 
             MUserService
-                .updateUser(uid, vm.user)
+                .updateUser(vm.uid, vm.user)
                 .then(
                     function (response) {
                         console.log("Movies updated");

@@ -10,31 +10,95 @@
         vm.getLang = getLang;
         vm.displayLoginMessage = displayLoginMessage;
         vm.mid = $routeParams['mid'];
-        var uid = $routeParams['uid'];
+        vm.uid = $routeParams['uid'];
         var lid = $routeParams['lid'];
         vm.backPressed = backPressed;
+        vm.removeFromAllLists = removeFromAllLists;
 
         $(document).ready(function () {
             if(window.location.href.indexOf("list/") > -1) {
                 vm.backToList = true;
+                vm.showRemove = true;
             }
         });
         
         init();
 
+        function getSmallMovie(movie){
+            if(movie){
+
+                var newMovie = {
+                    id : movie.id,
+                    title : movie.title
+                }
+                if(movie.overview){
+                    newMovie['overview'] = movie.overview;
+                }
+
+                if(movie.poster_path){
+                    newMovie['poster_path'] = movie.poster_path;
+                }
+
+                if(movie.original_language){
+                    newMovie['original_language'] = movie.original_language;
+                }
+
+                if(movie.release_date){
+                    newMovie['release_date'] = movie.release_date;
+                }
+
+                return newMovie;
+
+            }else{
+                return movie;
+            }
+        }
+
+        function removeFromAllLists(movie){
+
+            movie = getSmallMovie(movie);
+            var movieCopy = angular.copy(movie);
+
+            if(vm.user.likeList){
+                delete vm.user.likeList[movieCopy.id];
+            }
+
+            if(vm.user.dislikeList){
+                delete vm.user.dislikeList[movieCopy.id];
+            }
+
+            if(vm.user.watchList){
+                delete vm.user.watchList[movieCopy.id];
+            }
+
+            MUserService
+                .updateUser(vm.uid, vm.user)
+                .then(
+                    function (response) {
+                        vm.message = "Removed from all lists";
+                        vm.showRemove = false;
+                        console.log("Movies updated");
+                    },
+                    function () {
+                        vm.error = "Couldn't remove movie";
+                        console.log("Couldn't update movies");
+                    }
+                );
+        }
+
 
         function backPressed() {
             if(vm.backToList){
-                $location.url("/user/" + uid + "/list/" + lid);
+                $location.url("/user/" + vm.uid + "/list/" + lid);
             }else{
-                $location.url("/user/" + uid);
+                $location.url("/user/" + vm.uid);
             }
         }
         
         function init() {
 
             MUserService
-                .findUserById(uid)
+                .findUserById(vm.uid)
                 .then(function (response) {
                     vm.user = response.data;
                 });

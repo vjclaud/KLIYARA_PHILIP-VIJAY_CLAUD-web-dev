@@ -20,10 +20,10 @@ var overviewHeight = null;
 
                     
                     
-                    textSection.css('max-height', imgSection.height() - 20 + 'px' );
+                    textSection.css('max-height', imgSection.height() - 10 + 'px' );
 
                     textSection.css('line-height', overviewHeight + 'px' );
-                    textSection.css('-webkit-line-clamp', parseInt((imgSection.height() - 20)/overviewHeight) + ''  );
+                    textSection.css('-webkit-line-clamp', parseInt((imgSection.height() - 10)/overviewHeight) + ''  );
                 };
 
                 // Call to the function when the page is first loaded

@@ -41,6 +41,12 @@
                 controllerAs : "model"
             })
 
+            .when("/user/:uid/profile", {
+                templateUrl : "views/user/profile.view.client.html",
+                controller : "UserProfileViewController",
+                controllerAs : "model"
+            })
+
             .when("/user/:uid/list/:lid", {
                 templateUrl : "views/user/list.view.client.html",
                 controller : "UserListViewController",

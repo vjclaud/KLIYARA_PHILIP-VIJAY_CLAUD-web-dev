@@ -3,8 +3,15 @@
             <a class="navbar-brand">
                 User Home
             </a>
+
+        <p class="navbar-text pull-right">
+            <a href="#/user/{{model.uid}}/profile">
+                <span class="glyphicon glyphicon-user icon-right"></span>
+            </a>
+        </p>
     </div>
 </nav>
+
 <div class="container">
     <div ng-if ="model.error" class="alert alert-danger" role="alert">
         <button ng-click="model.error = null" type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -35,25 +42,16 @@
                     </img>
                 </div>
                 <div ng-click="model.viewMovie(movie)" class="col-xs-8">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>
-                                {{movie.title + ' (' + movie.release_date.substring(0,4) + ')' + model.getLang(movie.original_language)}}
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <div id="overview" class="limit-text">
-                                    {{movie.overview}}
-                                </div>
-
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="row">
+                        <div>
+                            <b>{{movie.title + ' (' + movie.release_date.substring(0,4) + ')' + model.getLang(movie.original_language)}}</b>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="overview" class="limit-text">
+                            {{movie.overview}}
+                        </div>
+                    </div>
                 </div>
                 <div class="row navbar-text col-xs-12">
                     <div ng-click="model.addMovieToDislikeList($event, $index, movie)"

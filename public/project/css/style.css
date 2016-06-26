@@ -148,6 +148,27 @@ a{
     color: #4285F4;
 }
 
+.btn-primary{
+    background-color: #4285F4;
+}
+
+.btn-success{
+    background-color: #34A853;
+}
+
+.btn-warning{
+    background-color: #F4B400;
+}
+
+.btn-danger{
+    background-color: #EA4335;
+}
+
+.large-padding{
+    padding-top: 20pt;
+    padding-bottom: 20pt;
+}
+
 .switch-space{
     margin-top: 15pt;
     margin-bottom: 15pt;

@@ -14,7 +14,7 @@
         vm.myPagingFunction = myPagingFunction;
         vm.searchObject = TMDBService.getSearchObject();
         vm.reset = reset;
-        var uid = $routeParams['uid'];
+        vm.uid = $routeParams['uid'];
         vm.isoGenres = isoGenres.genres;
         vm.years = [];
         for (i = new Date().getFullYear(); i > 1900; i--)
@@ -28,7 +28,7 @@
         function init() {
 
             MUserService
-                .findUserById(uid)
+                .findUserById(vm.uid)
                 .then(function (response) {
                     vm.user = response.data;
                 });

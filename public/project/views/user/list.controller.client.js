@@ -12,7 +12,7 @@
         vm.getLang = getLang;
         vm.viewMovie = viewMovie;
         vm.changeList = changeList;
-        var uid = $routeParams['uid'];
+        vm.uid = $routeParams['uid'];
         vm.lid = $routeParams['lid'];
         vm.addMovieToDislikeList = addMovieToDislikeList;
         vm.addMovieToWatchList = addMovieToWatchList;
@@ -81,7 +81,7 @@
 
         function init() {
             MUserService
-                .findUserById(uid)
+                .findUserById(vm.uid)
                 .then(function (response) {
                     vm.user = response.data;
                     changeList(vm.lid);
@@ -112,7 +112,7 @@
                     delete vm.user.watchList[movie.id];
             }
             MUserService
-                .updateUser(uid, vm.user)
+                .updateUser(vm.uid, vm.user)
                 .then(
                     function (response) {
                         console.log("Movies updated");
