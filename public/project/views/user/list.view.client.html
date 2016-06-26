@@ -1,0 +1,142 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <p class="navbar-text pull-left">
+            <a href="#/user/{{model.user._id}}">
+                <span class="glyphicon glyphicon-chevron-left icon-left"></span>
+            </a>
+        </p>
+        <a class="navbar-brand center-text pull-right">
+            {{model.title}}
+        </a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div ng-if ="model.error" class="alert alert-danger" role="alert">
+        <button ng-click="model.error = null" type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{model.error}}</div>
+    <div ng-if="model.message" class="alert alert-success alert-dismissible" role="alert">
+        <button ng-click="model.message = null" type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{model.message}}
+    </div>
+    <div ng-repeat ="movie in model.movies"
+         ng-if="movie.poster_path"
+         class="vj-padded"
+         view-resize>
+        <div ng-if="movie.poster_path"
+             id ="{{movie.id}}"
+             class="row row-padded">
+            <div ng-click="model.viewMovie(movie)" class="col-xs-4 min-size-image">
+                <img width="100%"
+                     id="poster"
+                     ng-src="{{model.tmdbImageUrl + movie.poster_path}}"
+                     class="thumbnail min-size-image"
+                     imageonload>
+                </img>
+            </div>
+            <div ng-click="model.viewMovie(movie)" class="col-xs-8">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            {{movie.title + ' (' + movie.release_date.substring(0,4) + ')' + model.getLang(movie.original_language)}}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div id="overview" class="limit-text">
+                                {{movie.overview}}
+                            </div>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row navbar-text col-xs-12">
+
+                <div ng-click="model.addMovieToWatchList($event, $index, movie)"
+                     ng-if = "model.lid!=0"
+                     id ="wd{{movie.id}}"
+                     class="col-xs-4 text-center">
+                    <a id ="wa{{movie.id}}">
+                        <span  class="glyphicon glyphicon-plus add white" id ="ws{{movie.id}}"></span>
+                    </a>
+                </div>
+                <div ng-if = "model.lid==0"
+                     class="col-xs-4 text-center">
+                    <a>
+                        <span  class="glyphicon glyphicon-plus white"></span>
+                    </a>
+                </div>
+                <div ng-click="model.addMovieToLikeList($event, $index, movie)"
+                     ng-if = "model.lid!=1"
+                     id ="ld{{movie.id}}"
+                     class="col-xs-4 text-center">
+                    <a  id ="la{{movie.id}}">
+                        <span class="glyphicon glyphicon-heart like"  id ="ls{{movie.id}}"></span>
+                    </a>
+                </div>
+                <div ng-if = "model.lid==1"
+                     class="col-xs-4 text-center">
+                    <a >
+                        <span class="glyphicon glyphicon-heart white"></span>
+                    </a>
+                </div>
+                <div ng-click="model.addMovieToDislikeList($event, $index, movie)"
+                     ng-if = "model.lid!=2"
+                     id ="rd{{movie.id}}"
+                     class="col-xs-4 text-center">
+                    <a id ="ra{{movie.id}}">
+                        <span  class="glyphicon glyphicon-remove remove" id ="rs{{movie.id}}"></span>
+                    </a>
+                </div>
+                <div ng-if = "model.lid==2"
+                     class="col-xs-4 text-center">
+                    <a>
+                        <span class="glyphicon glyphicon-remove white"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<nav class="navbar navbar-default navbar-fixed-bottom vertical-center" >
+    <div class="container">
+        <div class="col-xs-4 tabbar-item" ng-click="model.changeList(0)">
+            <a>
+                <span id="watchlist" class="pull-left">
+                    <span class="glyphicon glyphicon-plus icon-left"></span>
+                    <span class="glyphicon glyphicon-list" ></span>
+                </span>
+
+            </a>
+        </div>
+        <div class="col-xs-4 text-center tabbar-item" ng-click="model.changeList(1)">
+            <a>
+                <span id="likes">
+                    <span class="glyphicon glyphicon-heart"></span>
+                    <span class="glyphicon glyphicon-list"></span>
+                </span>
+            </a>
+        </div>
+        <div class="col-xs-4 text-center tabbar-item" ng-click="model.changeList(2)">
+            <a>
+                <span id="dislikes" class="pull-right">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    <span class="glyphicon glyphicon-list"></span>
+                </span>
+
+            </a>
+        </div>
+    </div>
+</nav>

@@ -10,9 +10,26 @@
         vm.getLang = getLang;
         vm.displayLoginMessage = displayLoginMessage;
         vm.mid = $routeParams['mid'];
-        uid = $routeParams['uid'];
+        var uid = $routeParams['uid'];
+        var lid = $routeParams['lid'];
+        vm.backPressed = backPressed;
+
+        $(document).ready(function () {
+            if(window.location.href.indexOf("list/") > -1) {
+                vm.backToList = true;
+            }
+        });
         
         init();
+
+
+        function backPressed() {
+            if(vm.backToList){
+                $location.url("/user/" + uid + "/list/" + lid);
+            }else{
+                $location.url("/user/" + uid);
+            }
+        }
         
         function init() {
 

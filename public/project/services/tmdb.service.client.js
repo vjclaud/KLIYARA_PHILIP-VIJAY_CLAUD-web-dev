@@ -13,7 +13,7 @@
         searchString : "",
         year : "",
         yearType : "After",
-        language : "",
+        genre : "",
         ageLock : true
     };
 
@@ -54,7 +54,7 @@
             if(searchObject
                 && searchObject.searchString == ""
                 && searchObject.year == ""
-                && searchObject.language == "") {
+                && searchObject.genre == "") {
                  return false;
             }else if(searchObject){
                 return true;
@@ -70,8 +70,8 @@
                 if(searchObject.searchString != ""){
 
                     searchObject.searchString = encodeURIComponent(searchObject.searchString);
-                    if(searchObject.language != ""){
-                        parameters = parameters + "&language=" + searchObject.language;
+                    if(searchObject.genre != ""){
+                        parameters = parameters + "&with_genres=" + searchObject.genre;
                     }
 
                     if(searchObject.yearType == "Release Year" && searchObject.year != ""){
@@ -94,6 +94,10 @@
                     }else{
                         parameters = parameters + "&release_date.gte=" + searchObject.year + "-01-01";
                     }
+                }
+
+                if(searchObject.genre != ""){
+                    parameters = parameters + "&with_genres=" + searchObject.genre;
                 }
 
 
@@ -135,7 +139,7 @@
                 searchString : "",
                 year : "",
                 yearType : "After",
-                language : "",
+                genre : "",
                 ageLock : true
             }
             return searchObject;

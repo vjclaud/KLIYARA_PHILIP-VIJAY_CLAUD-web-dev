@@ -3,6 +3,12 @@ var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
+UserListType = {
+    LIKE : 0,
+    DISLIKE : 1,
+    WATCH : 2
+}
+
 module.exports = function(app, models) {
 
     var users = [
@@ -24,6 +30,12 @@ module.exports = function(app, models) {
     app.post("/api/m/register", register);
     app.post("/api/m/login", passport.authenticate('movie'), login);
     app.put("/api/m/user/:userId", updateUser);
+    app.put("/api/m/user/:userId/addMovieToLikeList", addMovieToLikeList);
+    app.put("/api/m/user/:userId/removeMovieFromLikeList", removeMovieFromLikeList);
+    app.put("/api/m/user/:userId/addMovieToWatchList", addMovieToWatchList);
+    app.put("/api/m/user/:userId/removeMovieFromWatchList", removeMovieFromWatchList);
+    app.put("/api/m/user/:userId/addMovieToDislikeList", addMovieToDislikeList);
+    app.put("/api/m/user/:userId/removeMovieFromDislikeList", removeMovieFromDislikeList);
     app.delete("/api/m/user/:userId", deleteUser);
     app.get("/api/m/user", getUsers);
     app.get("/api/m/loggedIn", loggedIn);
@@ -245,6 +257,155 @@ module.exports = function(app, models) {
                 },
                 function (error) {
                     res.statusCode(400).send(error);
+                }
+            );
+    }
+
+
+    function userByAddingMovieToList(user, movie, listType) {
+        switch(listType) {
+            case UserListType.LIKE:
+                if(user.likeList){
+                    if(user.likeList['' + movie.id]==null){
+                        user.likeList['' + movie.id] = movie;
+                    }
+                }else{
+                    var likeList = {};
+                    likeList['' + movie.id] = movie;
+                    user.likeList = likeList;
+                }
+                break;
+            case UserListType.DISLIKE:
+                if(user.dislikeList){
+                    if(user.dislikeList['' + movie.id]==null){
+                        user.dislikeList['' + movie.id] = movie;
+                    }
+                }else{
+                    var dislikeList = {};
+                    dislikeList['' + movie.id] = movie;
+                    user.dislikeList = dislikeList;
+                }
+                break;
+            case UserListType.WATCH:
+                if(user.watchList){
+                    if(user.watchList['' + movie.id]==null){
+                        user.watchList['' + movie.id] = movie;
+                    }
+                }else{
+                    var watchList = {};
+                    watchList['' + movie.id] = movie;
+                    user.dislikeList = watchList;
+                }
+                break;
+            default:
+        }
+
+        return user;
+    }
+
+    function userByRemovingMovieToList(user, movie, listType) {
+        switch(listType) {
+            case UserListType.LIKE:
+                if(user.likeList){
+                    if(user.likeList['' + movie.id]!=null){
+                        delete user.likeList['' + movie.id];
+                    }
+                }
+                break;
+            case UserListType.DISLIKE:
+                if(user.dislikeList){
+                    if(user.dislikeList['' + movie.id]!=null){
+                        delete user.dislikeList['' + movie.id];
+                    }
+                }
+                break;
+            case UserListType.WATCH:
+                if(user.watchList){
+                    if(user.watchList['' + movie.id]!=null){
+                        delete user.watchList['' + movie.id];
+                    }
+                }
+                break;
+            default:
+        }
+
+        return user;
+    }
+
+    function addMovieToList(userId, movie, listType) {
+        userModel
+            .findUserById(userId)
+            .then(
+                function (user) {
+                    var updatedUser = userByAddingMovieToList(user, movie, listType);
+                    updateUserWithUpdatedUser(userId, updatedUser);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
+    }
+
+    function removeMovieFromList(userId, movie, listType) {
+        userModel
+            .findUserById(userId)
+            .then(
+                function (user) {
+                    var updatedUser = userByRemovingMovieToList(user, movie, listType);
+                    updateUserWithUpdatedUser(userId, updatedUser);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
+    }
+
+    function addMovieToLikeList(req, res) {
+        var movie = req.body;
+        var userId = req.params['userId'];
+        addMovieToList(userId, movie, UserListType.LIKE);
+    }
+
+    function removeMovieFromLikeList(req, res) {
+        var movie = req.body;
+        var userId = req.params['userId'];
+        removeMovieFromList(userId, movie, UserListType.LIKE);
+    }
+
+    function addMovieToWatchList(req, res) {
+        var movie = req.body;
+        var userId = req.params['userId'];
+        addMovieToList(userId, movie, UserListType.WATCH);
+    }
+
+    function removeMovieFromWatchList(req, res) {
+        var movie = req.body;
+        var userId = req.params['userId'];
+        removeMovieFromList(userId, movie, UserListType.WATCH);
+    }
+
+    function addMovieToDislikeList(req, res) {
+        var movie = req.body;
+        var userId = req.params['userId'];
+        addMovieToList(userId, movie, UserListType.DISLIKE);
+    }
+
+    function removeMovieFromDislikeList(req, res) {
+        var movie = req.body;
+        var userId = req.params['userId'];
+        removeMovieFromList(userId, movie, UserListType.DISLIKE);
+    }
+
+    function updateUserWithUpdatedUser(userId, updatedUser) {
+        userModel
+            .updateUser(userId, updatedUser)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.json(200);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
                 }
             );
     }

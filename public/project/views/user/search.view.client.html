@@ -44,12 +44,14 @@
                     id="yearPicker"
                     ng-model="model.searchObject.year"
                     class="form-control">
+                <option ng-repeat="year in model.years" value="{{year}}">{{year}}</option>
             </select>
-            <label for="languagePicker">Language</label>
-            <select name="languagePicker"
-                    id="languagePicker"
-                    ng-model="model.searchObject.language"
+            <label for="genrePicker">Genre</label>
+            <select name="genrePicker"
+                    id="genrePicker"
+                    ng-model="model.searchObject.genre"
                     class="form-control">
+                <option ng-repeat="option in model.isoGenres" value="{{option.id}}">{{option.name}}</option>
             </select>
             <div for="ageLock" class="switch-space">
                 <input type="checkbox"

@@ -1,18 +1,10 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <p class="navbar-text pull-left">
-            <a href="#/user/{{model.user._id}}">
+            <a ng-click="model.backPressed()">
                 <span class="glyphicon glyphicon-chevron-left icon-left"></span>
             </a>
         </p>
-    </div>
-</nav>
-
-<nav ng-if="model.loginMessage" class="navbar-fixed-top">
-    <div class="row container padded-message">
-        <div ng-if="model.loginMessage" class="alert alert-success" role="alert">
-            {{model.loginMessage}}
-        </div>
     </div>
 </nav>
 <div class="container">
@@ -76,11 +68,6 @@
         <p class="navbar-text pull-left">
             <a href="#/user/{{model.user._id}}">
                 <span class="glyphicon glyphicon-home icon-left"></span>
-            </a>
-        </p>
-        <p class="navbar-text pull-right">
-            <a href="#/user/{{model.user._id}}/search">
-                <span class="glyphicon glyphicon-search icon-right"></span>
             </a>
         </p>
     </div>

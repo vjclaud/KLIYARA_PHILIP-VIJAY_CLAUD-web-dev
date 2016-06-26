@@ -40,7 +40,10 @@ module.exports = function () {
                     $set : {
                         firstName : user.firstName,
                         lastName : user.lastName,
-                        email : user.email
+                        email : user.email,
+                        likeList : user.likeList ? user.likeList : {},
+                        dislikeList: user.dislikeList ? user.dislikeList : {},
+                        watchList: user.watchList ? user.watchList : {}
                     }
                 }
             );
@@ -48,5 +51,9 @@ module.exports = function () {
 
     function deleteUser(userId) {
         return User.remove({_id : userId});
+    }
+    
+    function addMovieToLikeList(userId, movie) {
+        
     }
 };

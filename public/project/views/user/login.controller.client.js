@@ -3,7 +3,7 @@
         .module("MovieSuggester")
         .controller("LoginViewController", LoginViewController);
 
-    function LoginViewController($location, MUserService) {
+    function LoginViewController($location, MUserService, TMDBService) {
 
         vm = this;
         vm.login = function (username, password) {
@@ -18,6 +18,7 @@
                     function (response) {
                         var user = response.data;
                         if(user._id){
+                            TMDBService.resetSearchObject();
                             $location.url("/user/" + user._id);
                         }else{
                             vm.error = "user couldn't be found"

@@ -49,6 +49,7 @@
     <script src="views/user/login.controller.client.js"></script>
     <script src="views/user/register.controller.client.js"></script>
     <script src="views/user/search.controller.client.js"></script>
+    <script src="views/user/list.controller.client.js"></script>
 
 
 
@@ -56,6 +57,8 @@
     <script src="services/user.service.client.js"></script>
 </head>
 <body>
-<div ng-view keep-scroll-pos></div>
+    <div class="view-animate-container">
+        <div ng-view class="view-animate" keep-scroll-pos></div>
+    </div>
 </body>
 </html>

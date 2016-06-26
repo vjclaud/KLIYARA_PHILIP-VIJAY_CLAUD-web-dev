@@ -1,25 +1,9 @@
-var searchObject = {
-    searchString : "",
-    year : "",
-    yearType : "After",
-    language : "",
-    ageLock : true
-};
-
-var baseSearchObject = {
-    searchString : "",
-    year : "",
-    yearType : "After",
-    language : "",
-    ageLock : true
-};
-
 (function () {
     angular
         .module("MovieSuggester")
         .controller("UserSearchViewController", UserSearchViewController);
 
-    function UserSearchViewController($location, TMDBService, $routeParams, MUserService) {
+    function UserSearchViewController($scope, $location, TMDBService, $routeParams, MUserService) {
         var vm = this;
         vm.search = search;
         var page = 0;
@@ -27,11 +11,17 @@ var baseSearchObject = {
         var totalPages = 0;
         vm.tmdbData = null;
         vm.tmdbImageUrl = "http://image.tmdb.org/t/p/w500";
-        vm.getLang = getLang;
         vm.myPagingFunction = myPagingFunction;
         vm.searchObject = TMDBService.getSearchObject();
         vm.reset = reset;
-        uid = $routeParams['uid'];
+        var uid = $routeParams['uid'];
+        vm.isoGenres = isoGenres.genres;
+        vm.years = [];
+        for (i = new Date().getFullYear(); i > 1900; i--)
+        {
+            vm.years.push(i);
+        }
+        
 
         init();
 
@@ -42,16 +32,6 @@ var baseSearchObject = {
                 .then(function (response) {
                     vm.user = response.data;
                 });
-
-            var i;
-            for (i = new Date().getFullYear(); i > 1900; i--)
-            {
-                $('#yearPicker').append($('<option />').val(i).html(i));
-            }
-
-            for (var key in isoLangs) {
-                $('#languagePicker').append($('<option />').val(key).html(isoLangs[key].name));
-            }
         }
 
         
@@ -64,18 +44,7 @@ var baseSearchObject = {
             }
             
         }
-
-        function getLang(lang) {
-            if(getLang){
-                var language = isoLangs[lang];
-                if(language && language['name']){
-                    return " " + language.name;
-                }
-            }else{
-                return "";
-            }
-        }
-
+        
         function reset() {
             vm.searchObject = TMDBService.resetSearchObject();
         }

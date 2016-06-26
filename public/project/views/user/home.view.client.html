@@ -5,13 +5,6 @@
             </a>
     </div>
 </nav>
-<nav ng-if="model.loginMessage" class="navbar-fixed-top">
-    <div class="row container padded-message">
-        <div ng-if="model.loginMessage" class="alert alert-success" role="alert">
-            {{model.loginMessage}}
-        </div>
-    </div>
-</nav>
 <div class="container">
     <div ng-if ="model.error" class="alert alert-danger" role="alert">
         <button ng-click="model.error = null" type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -27,10 +20,12 @@
     <div infinite-scroll="model.myPagingFunction()"
          infinite-scroll-distance="3">
         <div ng-repeat ="movie in model.tmdbData.results"
-             ng-if="movie.poster_path"
+             ng-if="movie.poster_path && model.movieList[movie.id]==null"
              class="vj-padded"
              view-resize>
-            <div ng-if="movie.poster_path" class="row row-padded">
+            <div ng-if="movie.poster_path"
+                 id ="{{movie.id}}"
+                 class="row row-padded">
                 <div ng-click="model.viewMovie(movie)" class="col-xs-4 min-size-image">
                     <img width="100%"
                          id="poster"
@@ -61,19 +56,25 @@
                     </table>
                 </div>
                 <div class="row navbar-text col-xs-12">
-                    <div ng-click="model.displayLoginMessage()" class="col-xs-4 text-center">
-                        <a>
-                            <span class="glyphicon glyphicon-thumbs-down"></span>
+                    <div ng-click="model.addMovieToDislikeList($event, $index, movie)"
+                         id ="rd{{movie.id}}"
+                         class="col-xs-4 text-center">
+                        <a id ="ra{{movie.id}}">
+                            <span class="glyphicon glyphicon-remove remove" id ="rs{{movie.id}}"></span>
                         </a>
                     </div>
-                    <div ng-click="model.displayLoginMessage()" class="col-xs-4 text-center">
-                        <a>
-                            <span class="glyphicon glyphicon-thumbs-up"></span>
+                    <div ng-click="model.addMovieToLikeList($event, $index, movie)"
+                         id ="ld{{movie.id}}"
+                         class="col-xs-4 text-center">
+                        <a  id ="la{{movie.id}}">
+                            <span class="glyphicon glyphicon-heart like"  id ="ls{{movie.id}}"></span>
                         </a>
                     </div>
-                    <div ng-click="model.displayLoginMessage()" class="col-xs-4 text-center">
-                        <a>
-                            <span class="glyphicon glyphicon-plus"></span>
+                    <div ng-click="model.addMovieToWatchList($event, $index, movie)"
+                         id ="wd{{movie.id}}"
+                         class="col-xs-4 text-center">
+                        <a id ="wa{{movie.id}}">
+                            <span class="glyphicon glyphicon-plus add" id ="ws{{movie.id}}"></span>
                         </a>
                     </div>
                 </div>
@@ -82,17 +83,22 @@
     </div>
 
 </div>
-<nav class="navbar navbar-default navbar-fixed-bottom">
+<nav class="navbar navbar-default navbar-fixed-bottom vertical-center" >
     <div class="container">
-        <p class="navbar-text pull-left">
+        <div class="col-xs-4 tabbar-item">
             <a>
-                <span class="glyphicon glyphicon-home icon-left white"></span>
+                <span class="glyphicon glyphicon-home white pull-left icon-left"></span>
             </a>
-        </p>
-        <p class="navbar-text pull-right">
+        </div>
+        <div class="col-xs-4 text-center tabbar-item">
+            <a href="#/user/{{model.user._id}}/list/0" id ="listLocation">
+                <span class="glyphicon glyphicon-th-list"></span>
+            </a>
+        </div>
+        <div class="col-xs-4 text-center tabbar-item">
             <a href="#/user/{{model.user._id}}/search">
-                <span class="glyphicon glyphicon-search icon-right"></span>
+                <span class="glyphicon glyphicon-filter pull-right icon-right"></span>
             </a>
-        </p>
+        </div>
     </div>
 </nav>

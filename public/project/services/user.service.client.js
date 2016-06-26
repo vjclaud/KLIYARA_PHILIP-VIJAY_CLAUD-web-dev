@@ -16,10 +16,52 @@
             findUserById : findUserById,
             findUserByUsername : findUserByUsername,
             updateUser : updateUser,
-            deleteUser : deleteUser
+            deleteUser : deleteUser,
+            addMovieToLikeList : addMovieToLikeList,
+            removeMovieFromLikeList : removeMovieFromLikeList,
+            addMovieToWatchList : addMovieToWatchList,
+            removeMovieFromWatchList : removeMovieFromWatchList,
+            addMovieToDislikeList : addMovieToDislikeList,
+            removeMovieFromDislikeList : removeMovieFromDislikeList
         }
 
         return api;
+
+        function addMovieToLikeList(userId, movie) {
+
+            var url = "/api/m/user/" + userId + "/addMovieToLikeList";
+            return $http.put(url,movie);
+        }
+
+        function removeMovieFromLikeList(userId, movie) {
+
+            var url = "/api/m/user/" + userId + "/removeMovieFromLikeList";
+            return $http.put(url,movie);
+        }
+
+        function addMovieToWatchList(userId, movie) {
+
+            var url = "/api/m/user/" + userId + "/addMovieToWatchList";
+            return $http.put(url,movie);
+        }
+
+        function removeMovieFromWatchList(userId, movie) {
+
+            var url = "/api/m/user/" + userId + "/removeMovieFromWatchList";
+            return $http.put(url,movie);
+        }
+
+        function addMovieToDislikeList(userId, movie) {
+
+            var url = "/api/m/user/" + userId + "/addMovieToDislikeList";
+            return $http.put(url,movie);
+        }
+
+        function removeMovieFromDislikeList(userId, movie) {
+
+            var url = "/api/m/user/" + userId + "/removeMovieFromDislikeList";
+            return $http.put(url,movie);
+        }
         
 
         function logout() {

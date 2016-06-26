@@ -34,8 +34,8 @@
         <div ng-repeat ="movie in model.tmdbData.results"
              ng-if="movie.poster_path"
              class="vj-padded"
-             view-resize>
-            <div ng-if="movie.poster_path" class="row row-padded">
+             view-resize >
+            <div ng-if="movie.poster_path" class="row row-padded" id = "{{movie.id}}row">
                 <div ng-click="model.viewMovie(movie)" class="col-xs-4 min-size-image">
                     <img width="100%"
                          id="poster"
@@ -66,19 +66,20 @@
                     </table>
                 </div>
                 <div class="row navbar-text col-xs-12">
-                    <div ng-click="model.displayLoginMessage()" class="col-xs-4 text-center">
+                    <div ng-click="model.displayLoginMessage()"
+                         class="col-xs-4 text-center">
                         <a>
-                            <span class="glyphicon glyphicon-thumbs-down"></span>
+                            <span class="glyphicon glyphicon-remove remove"></span>
                         </a>
                     </div>
                     <div ng-click="model.displayLoginMessage()" class="col-xs-4 text-center">
                         <a>
-                            <span class="glyphicon glyphicon-thumbs-up"></span>
+                            <span class="glyphicon glyphicon-heart like"></span>
                         </a>
                     </div>
                     <div ng-click="model.displayLoginMessage()" class="col-xs-4 text-center">
-                        <a>
-                            <span class="glyphicon glyphicon-plus"></span>
+                        <a class="text-center">
+                            <span class="glyphicon glyphicon-plus add"></span>
                         </a>
                     </div>
                 </div>
@@ -94,9 +95,9 @@
                 <span class="glyphicon glyphicon-home icon-left white"></span>
             </a>
         </p>
-        <p class="navbar-text pull-right">
+        <p class="navbar-text pull-right" id="here">
             <a href="#/search">
-                <span class="glyphicon glyphicon-search icon-right"></span>
+                <span class="glyphicon glyphicon-filter icon-right"></span>
             </a>
         </p>
     </div>

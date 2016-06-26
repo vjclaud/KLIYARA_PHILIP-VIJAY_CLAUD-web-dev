@@ -1,6 +1,6 @@
 module.exports = function () {
     var mongoose = require('mongoose');
-    var UserSchema = mongoose.Schema({
+    var MovieSchema = mongoose.Schema({
         username : {type : String, required : true},
         password : String,
         likeList : Object,
