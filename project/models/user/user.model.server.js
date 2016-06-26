@@ -9,9 +9,22 @@ module.exports = function () {
         findUserByCredentials : findUserByCredentials,
         updateUser : updateUser,
         deleteUser : deleteUser,
-        findFacebookUser : findFacebookUser
+        findFacebookUser : findFacebookUser,
+        findAllUsers : findAllUsers,
+        findUsersWithIds : findUsersWithIds
     };
     return api;
+
+    function findUsersWithIds(ids) {
+        var mongooseIds = [];
+        for(var i in ids){
+            mongooseIds.push(mongoose.Types.ObjectId(ids[i]));
+        }
+        return User.find({'_id': { $in: mongooseIds}});
+    }
+    function findAllUsers() {
+        return User.find({});
+    }
 
     function findFacebookUser(id) {
         return User.findOne({"facebook.id" : id});
@@ -43,7 +56,9 @@ module.exports = function () {
                         email : user.email,
                         likeList : user.likeList ? user.likeList : {},
                         dislikeList: user.dislikeList ? user.dislikeList : {},
-                        watchList: user.watchList ? user.watchList : {}
+                        watchList: user.watchList ? user.watchList : {},
+                        following: user.following ? user.following : {},
+                        followerCount: user.followerCount ? user.followerCount : 0
                     }
                 }
             );
@@ -52,8 +67,5 @@ module.exports = function () {
     function deleteUser(userId) {
         return User.remove({_id : userId});
     }
-    
-    function addMovieToLikeList(userId, movie) {
-        
-    }
+
 };

@@ -82,6 +82,14 @@ div.search {
     background-color: #F7F7F7;
     border: 1pt solid #DDD;
 }
+
+.user-row-padded {
+    padding: 10pt;
+    margin-top: 5pt;
+    background-color: #F7F7F7;
+    border: 1pt solid #DDD;
+}
+
 .ui-effects-transfer {
     border: 1pt dotted black;
     background-color: #F7F7F7;
@@ -89,6 +97,10 @@ div.search {
 
 .vj-padded {
     padding: 5pt;
+}
+
+.btn-padded{
+    padding-top: 10pt;
 }
 
 .navbar {

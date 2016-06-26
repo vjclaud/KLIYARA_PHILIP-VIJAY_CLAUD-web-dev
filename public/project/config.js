@@ -44,7 +44,47 @@
             .when("/user/:uid/profile", {
                 templateUrl : "views/user/profile.view.client.html",
                 controller : "UserProfileViewController",
+                controllerAs : "model",
+                resolve : {
+                    loggedIn : checkLoggedIn
+                }
+            })
+
+            .when("/user/:uid/people", {
+                templateUrl : "views/people/people.view.client.html",
+                controller : "UserPeopleViewController",
+                controllerAs : "model",
+                resolve : {
+                    loggedIn : checkLoggedIn
+                }
+
+            })
+
+            .when("/user/:uid/following", {
+                templateUrl : "views/people/people.view.client.html",
+                controller : "UserPeopleViewController",
                 controllerAs : "model"
+
+            })
+
+            .when("/user/:uid/person/:pid/list/:lid", {
+                templateUrl : "views/people/list.view.client.html",
+                controller : "PersonListViewController",
+                controllerAs : "model",
+                resolve : {
+                    loggedIn : checkLoggedIn
+                }
+
+            })
+
+            .when("/user/:uid/following/:pid/list/:lid", {
+                templateUrl : "views/people/list.view.client.html",
+                controller : "PersonListViewController",
+                controllerAs : "model",
+                resolve : {
+                    loggedIn : checkLoggedIn
+                }
+
             })
 
             .when("/user/:uid/list/:lid", {

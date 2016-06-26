@@ -6,6 +6,8 @@ module.exports = function () {
         likeList : Object,
         watchList : Object,
         dislikeList : Object,
+        following : Object,
+        followerCount : Number,
         firstName : String,
         lastName : String,
         email : String,

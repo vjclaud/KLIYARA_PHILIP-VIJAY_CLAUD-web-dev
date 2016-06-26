@@ -25,19 +25,13 @@
             .when("/user/:uid", {
                 templateUrl : "views/user/profile.view.client.html",
                 controller : "ProfileViewController",
-                controllerAs : "model",
-                resolve : {
-                    loggedIn : checkLoggedIn
-                }
+                controllerAs : "model"
             })
 
             .when("/user", {
                 templateUrl : "views/user/profile.view.client.html",
                 controller : "ProfileViewController",
-                controllerAs : "model",
-                resolve : {
-                    loggedIn : checkLoggedIn
-                }
+                controllerAs : "model"
             })
 
 

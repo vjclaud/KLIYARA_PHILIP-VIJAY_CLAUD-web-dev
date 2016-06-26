@@ -15,6 +15,7 @@
             findUserByCredentials : findUserByCredentials,
             findUserById : findUserById,
             findUserByUsername : findUserByUsername,
+            findAllUsers : findAllUsers,
             updateUser : updateUser,
             deleteUser : deleteUser,
             addMovieToLikeList : addMovieToLikeList,
@@ -22,10 +23,21 @@
             addMovieToWatchList : addMovieToWatchList,
             removeMovieFromWatchList : removeMovieFromWatchList,
             addMovieToDislikeList : addMovieToDislikeList,
-            removeMovieFromDislikeList : removeMovieFromDislikeList
+            removeMovieFromDislikeList : removeMovieFromDislikeList,
+            findUsersWithIds : findUsersWithIds
         }
 
         return api;
+        
+        function findAllUsers() {
+            var url = "/api/m/user";
+            return $http.get(url);
+        }
+
+        function findUsersWithIds(ids) {
+            var url = "/api/m/user/ids";
+            return $http.post(url,ids);
+        }
 
         function addMovieToLikeList(userId, movie) {
 

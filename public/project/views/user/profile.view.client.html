@@ -1,6 +1,11 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#/user/{{model.uid}}">
+                    <span class="glyphicon glyphicon-chevron-left icon-left"></span>
+                </a>
+            </p>
             <a class="navbar-brand">
                 Profile
             </a>
@@ -89,3 +94,13 @@
     </div>
 
 </div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <p class="navbar-text pull-left">
+            <a href="#/user/{{model.uid}}">
+                <span class="glyphicon glyphicon-home icon-left"></span>
+            </a>
+        </p>
+    </div>
+</nav>

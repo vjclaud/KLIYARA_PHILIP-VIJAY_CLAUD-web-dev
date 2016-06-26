@@ -33,23 +33,25 @@
             <div ng-if="movie.poster_path"
                  id ="{{movie.id}}"
                  class="row row-padded">
-                <div ng-click="model.viewMovie(movie)" class="col-xs-4 min-size-image">
-                    <img width="100%"
-                         id="poster"
-                         ng-src="{{model.tmdbImageUrl + movie.poster_path}}"
-                         class="thumbnail min-size-image"
-                         imageonload>
-                    </img>
-                </div>
-                <div ng-click="model.viewMovie(movie)" class="col-xs-8">
-                    <div class="row">
-                        <div>
-                            <b>{{movie.title + ' (' + movie.release_date.substring(0,4) + ')' + model.getLang(movie.original_language)}}</b>
-                        </div>
+                <div ng-click="model.viewMovie(movie)">
+                    <div class="col-xs-4 min-size-image">
+                        <img width="100%"
+                             id="poster"
+                             ng-src="{{model.tmdbImageUrl + movie.poster_path}}"
+                             class="thumbnail min-size-image"
+                             imageonload>
+                        </img>
                     </div>
-                    <div class="row">
-                        <div id="overview" class="limit-text">
-                            {{movie.overview}}
+                    <div class="col-xs-8">
+                        <div class="row">
+                            <div>
+                                <b>{{movie.title + ' (' + movie.release_date.substring(0,4) + ')' + model.getLang(movie.original_language)}}</b>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="overview" class="limit-text">
+                                {{movie.overview}}
+                            </div>
                         </div>
                     </div>
                 </div>

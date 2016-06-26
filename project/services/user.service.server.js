@@ -1,7 +1,7 @@
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var FacebookStrategy = require('passport-facebook').Strategy;
-var bcrypt = require("bcrypt-nodejs");
+var Mpassport = require('passport');
+var MLocalStrategy = require('passport-local').Strategy;
+var MFacebookStrategy = require('passport-facebook').Strategy;
+var Mbcrypt = require("bcrypt-nodejs");
 
 UserListType = {
     LIKE : 0,
@@ -20,15 +20,15 @@ module.exports = function(app, models) {
 
     var userModel = models.userModel;
 
-    app.get("/auth/facebook", passport.authenticate('facebookMovie')) ;
-    app.get("/auth/facebook/callback", passport.authenticate('facebookMovie', {
-        successRedirect: '/assignment/#/user',
-        failureRedirect: '/assignment/#/login'
+    app.get("/auth/facebook", Mpassport.authenticate('facebookMovie')) ;
+    app.get("/auth/facebook/callback", Mpassport.authenticate('facebookMovie', {
+        successRedirect: '/project/#/user',
+        failureRedirect: '/project/#/login'
     })) ;
     app.post("/api/m/user", createUser);
     app.post("/api/m/logout", logout);
     app.post("/api/m/register", register);
-    app.post("/api/m/login", passport.authenticate('movie'), login);
+    app.post("/api/m/login", Mpassport.authenticate('movie'), login);
     app.put("/api/m/user/:userId", updateUser);
     app.put("/api/m/user/:userId/addMovieToLikeList", addMovieToLikeList);
     app.put("/api/m/user/:userId/removeMovieFromLikeList", removeMovieFromLikeList);
@@ -37,14 +37,15 @@ module.exports = function(app, models) {
     app.put("/api/m/user/:userId/addMovieToDislikeList", addMovieToDislikeList);
     app.put("/api/m/user/:userId/removeMovieFromDislikeList", removeMovieFromDislikeList);
     app.delete("/api/m/user/:userId", deleteUser);
-    app.get("/api/m/user", getUsers);
+    app.get("/api/m/user", findAllUsers);
+    app.post("/api/m/user/ids", findUsersWithIds);
     app.get("/api/m/loggedIn", loggedIn);
     app.get("/api/m/user/:userId", findUserById);
 
 
-    passport.use('movie', new LocalStrategy(localStrategy));
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
+    Mpassport.use('movie', new MLocalStrategy(localStrategy));
+    Mpassport.serializeUser(serializeUser);
+    Mpassport.deserializeUser(deserializeUser);
 
 
     // $ rhc env set FACEBOOK_CLIENT_ID="" FACEBOOK_CLIENT_SECRET="" FACEBOOK_CALLBACK_URL="" -a App_Name
@@ -55,7 +56,7 @@ module.exports = function(app, models) {
         callbackURL  : process.env.FACEBOOK_CALLBACK_URL ? process.env.FACEBOOK_CALLBACK_URL : "http://localhost:3000/auth/facebook/callback"
     };
 
-    passport.use('facebookMovie',new FacebookStrategy(facebookConfig, facebookLogin));
+    Mpassport.use('facebookMovie',new MFacebookStrategy(facebookConfig, facebookLogin));
 
     function facebookLogin(token, refreshToken, profile, done) {
         userModel
@@ -114,7 +115,7 @@ module.exports = function(app, models) {
                     if(user.password.charAt(0) != '$'){
                         return done(null, false);
                     }
-                    var samePassword = bcrypt.compareSync(password, user.password);
+                    var samePassword = Mbcrypt.compareSync(password, user.password);
                     if(user){
                         if(user.username === username && (samePassword === user.password || samePassword)) {
                             console.log(user);
@@ -150,7 +151,7 @@ module.exports = function(app, models) {
     function register(req, res) {
         var username = req.body['username'];
         var password = req.body['password'];
-        req.body.password = bcrypt.hashSync(password);
+        req.body.password = Mbcrypt.hashSync(password);
         userModel
             .findUserByUsername(username)
             .then(
@@ -182,22 +183,45 @@ module.exports = function(app, models) {
             )
     }
 
-    function getUsers(req, res) {
-        var username = req.query['username'];
-        var password = req.query['password'];
-        password = bcrypt.hashSync(user.password);
-        if(username && password){
-            findUserByCredentials(username, password, res);
-        }else if(username){
-            findUserByUsername(username, res);
+    function findUsersWithIds(req, res) {
+
+        var ids = req.body;
+        console.log(ids);
+        if(ids == null || ids.length == 0){
+            res.statusCode(404).send(error);
+            return;
+        }
+        userModel
+            .findUsersWithIds(ids)
+            .then(
+                function (users) {
+                    res.json(users);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
+    }
+
+    function findAllUsers(req, res) {
+        if(req.isAuthenticated()){
+            userModel
+                .findAllUsers()
+                .then(
+                    function (users) {
+                        res.json(users);
+                    },
+                    function (error) {
+                        res.statusCode(404).send(error);
+                    }
+                );
         }else{
-            res.send(users);
+            res.status(404).send('0');
         }
     }
 
     function login(req, res){
         var user = req.user;
-
         req.login(user, function (err) {
             if(err){
                 res.status(400).send(err);
