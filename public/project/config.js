@@ -23,6 +23,10 @@
                 controllerAs : "model"
             })
 
+            .when("/info", {
+                templateUrl : "views/public/info.view.client.html"
+            })
+
             .when("/login", {
                 templateUrl : "views/user/login.view.client.html",
                 controller : "LoginViewController",

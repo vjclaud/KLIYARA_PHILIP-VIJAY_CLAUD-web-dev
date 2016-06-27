@@ -17,6 +17,7 @@
          ng-click="model.viewUser(user, $index)"
          ng-if ="model.checkDisplay(user)"
          class="user-row-padded col-xs-12">
+        <div ng-if ="model.error" class="alert alert-danger" role="alert">{{model.error}}</div>
             <div class="col-xs-10">
                 <div>
                     <b>Username: </b>{{user.username}}

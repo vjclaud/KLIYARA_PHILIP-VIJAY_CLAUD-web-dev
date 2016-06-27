@@ -147,9 +147,9 @@
                 vm.user.dislikeList[movieCopy.id] = angular.copy(movieCopy);
             }
 
-
             if($event && $event.target.id){
-                $( "#" + $event.target.id.substring(2) ).toggle("blind");
+                var element = $("#" + $event.target.id.substring(2));
+                element.effect( "transfer", { to: $( "#listLocation" ) }, 400 );
             }
 
             MUserService

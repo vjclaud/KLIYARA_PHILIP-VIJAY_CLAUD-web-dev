@@ -169,8 +169,8 @@ a.gly{
     display: inline-block;
     position: relative;
     z-index: 1;
-    padding: 15pt;
-    margin: -15pt;
+    padding: 10pt;
+    margin: -10pt;
 }
 
 .add{
