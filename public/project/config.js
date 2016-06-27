@@ -140,11 +140,7 @@
             
             
 
-            .when("/user/:uid", {
-                templateUrl : "views/user/home.view.client.html",
-                controller : "UserHomeViewController",
-                controllerAs : "model"
-            })
+
 
             .when("/user/:uid/search", {
                 templateUrl : "views/user/search.view.client.html",
@@ -158,6 +154,24 @@
                 controllerAs : "model"
             })
 
+            .when("/user/:uid", {
+                templateUrl : "views/user/home.view.client.html",
+                controller : "UserHomeViewController",
+                controllerAs : "model",
+                resolve : {
+                    loggedIn : checkLoggedIn
+                }
+            })
+
+            .when("/user", {
+                templateUrl : "views/user/home.view.client.html",
+                controller : "UserHomeViewController",
+                controllerAs : "model",
+                resolve : {
+                    loggedIn : checkLoggedIn
+                }
+            })
+
             .when("/search", {
                 templateUrl : "views/public/search.view.client.html",
                 controller : "SearchViewController",
@@ -169,7 +183,7 @@
             })
     }
 
-     function checkLoggedIn(MUserService, $location, $q) {
+     function checkLoggedIn(MUserService, $location, $q, $rootScope) {
          var deffered = $q.defer();
          MUserService
              .loggedIn()
@@ -177,10 +191,11 @@
                  function (response) {
                      var user = response.data;
                      if(user == '0'){
-
+                         $rootScope.currentUser = null;
                          deffered.reject();
                          $location.url("/login");
                      }else{
+                         $rootScope.currentUser = user;
                          deffered.resolve();
                      }
                      console.log(user);

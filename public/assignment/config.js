@@ -25,13 +25,20 @@
             .when("/user/:uid", {
                 templateUrl : "views/user/profile.view.client.html",
                 controller : "ProfileViewController",
-                controllerAs : "model"
+                controllerAs : "model",
+
+                resolve : {
+                    loggedIn : checkLoggedIn
+                }
             })
 
             .when("/user", {
                 templateUrl : "views/user/profile.view.client.html",
                 controller : "ProfileViewController",
-                controllerAs : "model"
+                controllerAs : "model",
+                resolve : {
+                    loggedIn : checkLoggedIn
+                }
             })
 
 
@@ -122,10 +129,11 @@
                 function (response) {
                     var user = response.data;
                     if(user == '0'){
-
+                        $rootScope.currentUser = user;
                         deffered.reject();
                         $location.url("/login");
                     }else{
+                        $rootScope.currentUser = user;
                         deffered.resolve();
                     }
                     console.log(user);

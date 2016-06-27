@@ -3,7 +3,7 @@
         .module("MovieSuggester")
         .controller("UserHomeViewController", UserHomeViewController);
 
-    function UserHomeViewController($location, TMDBService, $timeout, $routeParams, MUserService) {
+    function UserHomeViewController($location, TMDBService,$rootScope, $timeout, $routeParams, MUserService) {
         var vm = this;
         var page = 0;
         var busy = false;
@@ -17,7 +17,12 @@
         vm.addMovieToLikeList = addMovieToLikeList;
         vm.viewMovie = viewMovie;
         vm.movieList = null;
-        vm.uid = $routeParams['uid'];
+
+        if($routeParams['uid']){
+            vm.uid = $routeParams['uid'];
+        }else{
+            vm.uid = $rootScope.currentUser._id;
+        }
 
         init();
 
@@ -119,7 +124,7 @@
 
         function viewMovie(movie) {
             if(vm.user && movie){
-                $location.url("/user/" + vm.user._id + "/detail/" + movie.id);
+                $location.url("/user/" + vm.uid + "/detail/" + movie.id);
             }
 
         }

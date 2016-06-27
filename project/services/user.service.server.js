@@ -1,6 +1,7 @@
 var Mpassport = require('passport');
 var MLocalStrategy = require('passport-local').Strategy;
 var MFacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
 var Mbcrypt = require("bcrypt-nodejs");
 
 UserListType = {
@@ -25,6 +26,15 @@ module.exports = function(app, models) {
         successRedirect: '/project/#/user',
         failureRedirect: '/project/#/login'
     })) ;
+
+    app.get   ('/auth/google',   Mpassport.authenticate('google', { scope : ['profile', 'email'] }));
+    app.get   ('/auth/google/callback',
+        Mpassport.authenticate('google', {
+            successRedirect: '/project/#/user',
+            failureRedirect: '/project/#/login'
+        }));
+
+
     app.post("/api/m/user", createUser);
     app.post("/api/m/logout", logout);
     app.post("/api/m/register", register);
@@ -52,11 +62,12 @@ module.exports = function(app, models) {
 
     var facebookConfig = {
         clientID     : process.env.FACEBOOK_CLIENT_ID ?  process.env.FACEBOOK_CLIENT_ID : "551697491678954",
-        clientSecret : process.env.FACEBOOK_CLIENT_SECRET ? process.env.FACEBOOK_CLIENT_SECRET : "clientSecret",
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET ? process.env.FACEBOOK_CLIENT_SECRET : "295edab8eb8daf90de4887ae861c1",
         callbackURL  : process.env.FACEBOOK_CALLBACK_URL ? process.env.FACEBOOK_CALLBACK_URL : "http://localhost:3000/auth/facebook/callback"
     };
 
     Mpassport.use('facebookMovie',new MFacebookStrategy(facebookConfig, facebookLogin));
+
 
     function facebookLogin(token, refreshToken, profile, done) {
         userModel
