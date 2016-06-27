@@ -1,0 +1,43 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <p class="navbar-text pull-left" ng-click="model.backPressed()">
+            <a>
+                <span class="glyphicon glyphicon-chevron-left icon-left"></span>
+            </a>
+        </p>
+    </div>
+</nav>
+
+<div class="container">
+    <div ng-if ="model.message" class="alert alert-success" role="alert">{{model.message}}</div>
+    <div ng-if ="model.error" class="alert alert-warning" role="alert">{{model.error}}</div>
+    <div ng-model="model.review.review"
+         text-angular
+         ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+        ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+        ['indent','outdent'],['html']]">
+    </div>
+</div>
+
+<div class="container">
+    <a class="btn btn-primary btn-block"
+       ng-click="model.submit()"
+       role="button">Submit Review</a>
+    <a class="btn btn-warning btn-block"
+       ng-if="model.review.review"
+       ng-click="model.remove()"
+       role="button">Delete</a>
+
+</div>
+
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <p class="navbar-text pull-left">
+            <a>
+                <span class="glyphicon glyphicon-home icon-left"></span>
+            </a>
+        </p>
+    </div>
+</nav>

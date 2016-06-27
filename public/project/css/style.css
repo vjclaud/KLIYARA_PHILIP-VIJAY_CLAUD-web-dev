@@ -90,6 +90,15 @@ div.search {
     border: 1pt solid #DDD;
 }
 
+.review-row-padded {
+    padding: 15pt;
+    margin-top: 5pt;
+    background-color: rgba(66, 133, 244, 0.43);
+    border: 1pt solid #DDD;
+}
+
+/*6aadff*/
+
 .ui-effects-transfer {
     border: 1pt dotted black;
     background-color: #F7F7F7;

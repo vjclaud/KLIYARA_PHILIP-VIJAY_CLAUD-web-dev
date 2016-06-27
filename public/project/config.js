@@ -108,6 +108,38 @@
                 controllerAs : "model"
             })
 
+
+
+
+            .when("/user/:uid/list/:lid/detail/:mid/review", {
+                templateUrl : "views/review/write.review.view.client.html",
+                controller : "UserReviewViewController",
+                controllerAs : "model"
+            })
+
+            .when("/user/:uid/following/:pid/list/:lid/detail/:mid/review", {
+                templateUrl : "views/review/write.review.view.client.html",
+                controller : "UserReviewViewController",
+                controllerAs : "model"
+            })
+
+            .when("/user/:uid/person/:pid/list/:lid/detail/:mid/review", {
+                templateUrl : "views/review/write.review.view.client.html",
+                controller : "UserReviewViewController",
+                controllerAs : "model"
+            })
+
+            .when("/user/:uid/detail/:mid/review", {
+                templateUrl : "views/review/write.review.view.client.html",
+                controller : "UserReviewViewController",
+                controllerAs : "model"
+            })
+            
+            
+            
+            
+            
+
             .when("/user/:uid", {
                 templateUrl : "views/user/home.view.client.html",
                 controller : "UserHomeViewController",

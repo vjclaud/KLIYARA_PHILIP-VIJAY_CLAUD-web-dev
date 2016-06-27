@@ -3,7 +3,7 @@
         .module("MovieSuggester")
         .controller("UserDetailViewController", UserDetailViewController);
 
-    function UserDetailViewController($location, TMDBService, $timeout, $routeParams, MUserService) {
+    function UserDetailViewController($location, TMDBService, $timeout, $routeParams, MUserService, ReviewService,$sce) {
         var vm = this;
         vm.tmdbData = null;
         vm.tmdbImageUrl = "http://image.tmdb.org/t/p/w500";
@@ -15,6 +15,8 @@
         vm.pid = $routeParams['pid'];
         vm.backPressed = backPressed;
         vm.removeFromAllLists = removeFromAllLists;
+        vm.writeReview = writeReview;
+        vm.getSafeHtml = getSafeHtml;
 
         $(document).ready(function () {
 
@@ -30,10 +32,20 @@
             }else if(window.location.href.indexOf("list/") > -1) {
                 vm.backToList = true;
                 vm.showRemove = true;
+                vm.fromHome = true;
             }
         });
+
         
         init();
+
+        function getSafeHtml(review) {
+            return $sce.trustAsHtml(review);
+        }
+
+        function writeReview() {
+            $location.url($location.path() + "/review");
+        }
 
         function getSmallMovie(movie){
             if(movie){
@@ -122,6 +134,15 @@
                 .then(function (response) {
                     vm.user = response.data;
                 });
+
+            ReviewService
+                .findReviewsByMovieId(vm.mid)
+                .then(
+                    function (response) {
+                        vm.reviews = response.data;
+                    }, function (err) {
+
+                    });
 
             TMDBService
                 .getMovieById(vm.mid)

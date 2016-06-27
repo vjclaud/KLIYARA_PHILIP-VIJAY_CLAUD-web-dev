@@ -2,15 +2,16 @@ module.exports = function(app, models) {
 
     var reviewModel = models.reviewModel;
 
-    app.post("/api/m/user/:userId/movie/:movieId/review", createReview);
+    app.post("/api/m/review", createReview);
     app.get("/api/m/user/:userId/movie/:movieId/review", findReviewsByUserIdAndMovieId);
     app.get("/api/m/movie/:movieId/review", findReviewsByMovieId);
     app.get("/api/m/user/:userId/review", findReviewsByUserId);
     app.put("/api/m/review/:reviewId", updateReview);
     app.delete("/api/m/review/:reviewId", deleteReview);
+    app.delete("/api/m/user/:userId/movie/:movieId", deleteReviewsByUserIdAndMovieId);
 
 
-    function findReviewsByUserIdAndMovieId() {
+    function findReviewsByUserIdAndMovieId(req, res) {
         var userId = req.params['userId'];
         var movieId = req.params['movieId'];
         reviewModel
@@ -25,11 +26,9 @@ module.exports = function(app, models) {
             );
     }
     function createReview(req, res) {
-        var userId = req.params['userId'];
-        var movieId = req.params['movieId'];
-        var review = req.body;
+        var reviewObj = req.body;
         reviewModel
-            .createReviewWithUserAndMovieId(userId, movieId, review)
+            .createReview(reviewObj)
             .then(
                 function (review) {
                     res.json(review);
@@ -90,6 +89,22 @@ module.exports = function(app, models) {
         var reviewId = req.params['reviewId'];
         reviewModel
             .deleteReviewById(reviewId)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.json(200);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
+    }
+
+    function deleteReviewsByUserIdAndMovieId(req, res) {
+        var userId = req.params['userId'];
+        var movieId = req.params['movieId'];
+        reviewModel
+            .deleteReviewById(userId, movieId)
             .then(
                 function (stats) {
                     console.log(stats);

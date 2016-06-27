@@ -1,10 +1,10 @@
 (function () {
     angular
-        .module("WebAppMaker")
-        .factory("WebsiteService", WebsiteService);
+        .module("MovieSuggester")
+        .factory("MovieService", MovieService);
 
 
-    function WebsiteService($http) {
+    function MovieService($http) {
         var api = {
             createWebsite : createWebsite,
             createWebsiteWithDetails : createWebsiteWithDetails,

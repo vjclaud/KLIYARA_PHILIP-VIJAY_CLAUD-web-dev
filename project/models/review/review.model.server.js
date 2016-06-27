@@ -4,27 +4,24 @@ module.exports = function () {
     var ReviewSchema = require("./review.schema.server.js")();
     var Review = mongoose.model("Review", ReviewSchema);
     var api = {
-        createReviewWithUserAndMovieId : createReviewWithUserAndMovieId,
+        createReview : createReview,
         findReviewsByUserIdAndMovieId : findReviewsByUserIdAndMovieId,
         findReviewsByMovieId : findReviewsByMovieId,
         findReviewsByUserId : findReviewsByUserId,
         updateReviewWithId : updateReviewWithId,
-        deleteReviewById : deleteReviewById
+        deleteReviewById : deleteReviewById,
+        deleteReviewsByUserIdAndMovieId : deleteReviewsByUserIdAndMovieId
     };
     return api;
 
 
-    function createReviewWithUserAndMovieId(userId, movieId, review) {
-        var reviewObj = {
-            'movieId' : movieId,
-            'userId' : userId,
-            'review' : review
-        }
-        return Review.create(reviewObj);
+    function createReview(review) {
+        console.log(review);
+        return Review.create(review);
     }
 
     function findReviewsByUserIdAndMovieId(userId, movieId) {
-        return Movie.findOne({movieId : movieId, userId : userId});
+        return Review.findOne({movieId : movieId, userId : userId});
     }
 
     function findReviewsByMovieId(mid) {
@@ -40,12 +37,16 @@ module.exports = function () {
         return Review
             .update(
                 {_id : reviewId},{
-                    $set : {review : review}
+                    $set : review
                 }
             );
     }
 
     function deleteReviewById(reviewId) {
         return Review.remove({_id : reviewId});
+    }
+
+    function deleteReviewsByUserIdAndMovieId(userId, movieId) {
+        return Review.remove({movieId : movieId, userId : userId});
     }
 };
