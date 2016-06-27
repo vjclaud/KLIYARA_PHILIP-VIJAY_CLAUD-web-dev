@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <p class="navbar-text pull-left">
-            <a href="#/user/{{model.user._id}}">
+            <a href="#/user/{{model.user._id}}"  class="gly">
                 <span class="glyphicon glyphicon-chevron-left icon-left"></span>
             </a>
         </p>
@@ -10,7 +10,7 @@
         </a>
 
         <p class="navbar-text pull-right">
-            <a href="#/user/{{model.uid}}/profile">
+            <a href="#/user/{{model.uid}}/profile"  class="gly">
                 <span class="glyphicon glyphicon-user icon-right"></span>
             </a>
         </p>
@@ -63,7 +63,7 @@
                      ng-if = "model.lid!=0"
                      id ="wd{{movie.id}}"
                      class="col-xs-4 text-center">
-                    <a id ="wa{{movie.id}}">
+                    <a id ="wa{{movie.id}}"  class="gly">
                         <span  class="glyphicon glyphicon-plus add white" id ="ws{{movie.id}}"></span>
                     </a>
                 </div>
@@ -73,11 +73,12 @@
                         <span  class="glyphicon glyphicon-plus white"></span>
                     </a>
                 </div>
-                <div ng-click="model.addMovieToLikeList($event, $index, movie)"
-                     ng-if = "model.lid!=1"
+                <div ng-if = "model.lid!=1"
                      id ="ld{{movie.id}}"
                      class="col-xs-4 text-center">
-                    <a  id ="la{{movie.id}}">
+                    <a  id ="la{{movie.id}}"
+                        ng-click="model.addMovieToLikeList($event, $index, movie)"
+                        class="gly">
                         <span class="glyphicon glyphicon-heart like"  id ="ls{{movie.id}}"></span>
                     </a>
                 </div>
@@ -87,11 +88,12 @@
                         <span class="glyphicon glyphicon-heart white"></span>
                     </a>
                 </div>
-                <div ng-click="model.addMovieToDislikeList($event, $index, movie)"
-                     ng-if = "model.lid!=2"
+                <div ng-if = "model.lid!=2"
                      id ="rd{{movie.id}}"
                      class="col-xs-4 text-center">
-                    <a id ="ra{{movie.id}}">
+                    <a id ="ra{{movie.id}}"
+                       ng-click="model.addMovieToDislikeList($event, $index, movie)"
+                       class="gly">
                         <span  class="glyphicon glyphicon-remove remove" id ="rs{{movie.id}}"></span>
                     </a>
                 </div>
@@ -110,7 +112,7 @@
 <nav class="navbar navbar-default navbar-fixed-bottom vertical-center" >
     <div class="container">
         <div class="col-xs-4 tabbar-item" ng-click="model.changeList(0)">
-            <a>
+            <a >
                 <span id="watchlist" class="pull-left">
                     <span class="glyphicon glyphicon-plus icon-left"></span>
                     <span class="glyphicon glyphicon-list" ></span>

@@ -1,12 +1,12 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <p class="navbar-text pull-left" ng-if="!model.followingList">
-            <a href="#/user/{{model.uid}}/people">
+            <a href="#/user/{{model.uid}}/people" class="gly">
                 <span class="glyphicon glyphicon-chevron-left icon-left"></span>
             </a>
         </p>
         <p class="navbar-text pull-left" ng-if="model.followingList">
-            <a href="#/user/{{model.uid}}/following">
+            <a href="#/user/{{model.uid}}/following"  class="gly">
                 <span class="glyphicon glyphicon-chevron-left icon-left"></span>
             </a>
         </p>
@@ -14,7 +14,7 @@
             {{model.title}}
         </a>
         <p class="navbar-text pull-right" id="saveLocation">
-            <a>
+            <a  class="gly">
                 <span class="glyphicon glyphicon-th-list icon-right white"></span>
             </a>
         </p>
@@ -66,21 +66,21 @@
                 <div ng-click="model.addMovieToWatchList($event, $index, movie)"
                      id ="wd{{movie.id}}"
                      class="col-xs-4 text-center">
-                    <a id ="wa{{movie.id}}">
+                    <a id ="wa{{movie.id}}"  class="gly">
                         <span  class="glyphicon glyphicon-plus add white" id ="ws{{movie.id}}"></span>
                     </a>
                 </div>
                 <div ng-click="model.addMovieToLikeList($event, $index, movie)"
                      id ="ld{{movie.id}}"
                      class="col-xs-4 text-center">
-                    <a  id ="la{{movie.id}}">
+                    <a  id ="la{{movie.id}}"  class="gly">
                         <span class="glyphicon glyphicon-heart like"  id ="ls{{movie.id}}"></span>
                     </a>
                 </div>
                 <div ng-click="model.addMovieToDislikeList($event, $index, movie)"
                      id ="rd{{movie.id}}"
                      class="col-xs-4 text-center">
-                    <a id ="ra{{movie.id}}">
+                    <a id ="ra{{movie.id}}"  class="gly">
                         <span  class="glyphicon glyphicon-remove remove" id ="rs{{movie.id}}"></span>
                     </a>
                 </div>

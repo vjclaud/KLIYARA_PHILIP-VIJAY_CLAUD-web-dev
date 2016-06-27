@@ -5,7 +5,7 @@
             </a>
 
         <p class="navbar-text pull-right">
-            <a href="#/user/{{model.uid}}/profile">
+            <a href="#/user/{{model.uid}}/profile" class="gly">
                 <span class="glyphicon glyphicon-user icon-right"></span>
             </a>
         </p>
@@ -56,27 +56,32 @@
                     </div>
                 </div>
                 <div class="row navbar-text col-xs-12">
-                    <div ng-click="model.addMovieToDislikeList($event, $index, movie)"
-                         id ="rd{{movie.id}}"
+                    <p id ="rd{{movie.id}}"
                          class="col-xs-4 text-center">
-                        <a id ="ra{{movie.id}}">
+                        <a id ="ra{{movie.id}}" href=""
+                           class="gly"
+                           ng-click="model.addMovieToDislikeList($event, $index, movie)">
                             <span class="glyphicon glyphicon-remove remove" id ="rs{{movie.id}}"></span>
                         </a>
-                    </div>
-                    <div ng-click="model.addMovieToLikeList($event, $index, movie)"
-                         id ="ld{{movie.id}}"
+                    </p>
+                    <p id ="ld{{movie.id}}"
                          class="col-xs-4 text-center">
-                        <a  id ="la{{movie.id}}">
+                        <a  id ="la{{movie.id}}"
+                            href=""
+                            class="gly"
+                            ng-click="model.addMovieToLikeList($event, $index, movie)">
                             <span class="glyphicon glyphicon-heart like"  id ="ls{{movie.id}}"></span>
                         </a>
-                    </div>
-                    <div ng-click="model.addMovieToWatchList($event, $index, movie)"
-                         id ="wd{{movie.id}}"
+                    </p>
+                    <p id ="wd{{movie.id}}"
                          class="col-xs-4 text-center">
-                        <a id ="wa{{movie.id}}">
+                        <a id ="wa{{movie.id}}"
+                           class="gly"
+                           ng-click="model.addMovieToWatchList($event, $index, movie)"
+                           href="">
                             <span class="glyphicon glyphicon-plus add" id ="ws{{movie.id}}"></span>
                         </a>
-                    </div>
+                    </p>
                 </div>
             </div>
         </div>
@@ -91,12 +96,12 @@
             </a>
         </div>
         <div class="col-xs-4 text-center tabbar-item">
-            <a href="#/user/{{model.user._id}}/list/0" id ="listLocation">
+            <a href="#/user/{{model.user._id}}/list/0"  class="gly" id ="listLocation">
                 <span class="glyphicon glyphicon-th-list"></span>
             </a>
         </div>
         <div class="col-xs-4 text-center tabbar-item">
-            <a href="#/user/{{model.user._id}}/search">
+            <a href="#/user/{{model.user._id}}/search"  class="gly">
                 <span class="glyphicon glyphicon-filter pull-right icon-right"></span>
             </a>
         </div>
