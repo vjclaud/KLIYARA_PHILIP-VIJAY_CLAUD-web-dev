@@ -66,8 +66,57 @@ module.exports = function(app, models) {
         callbackURL  : process.env.FACEBOOK_CALLBACK_URL ? process.env.FACEBOOK_CALLBACK_URL : "http://localhost:3000/auth/facebook/callback"
     };
 
-    Mpassport.use('facebookMovie',new MFacebookStrategy(facebookConfig, facebookLogin));
+    var googleConfig = {
+        clientID        : process.env.GOOGLE_CLIENT_ID ? process.env.GOOGLE_CLIENT_ID : "546497096125-p036iouit4cj8ubcet2m929t13lcv3g9.apps.googleusercontent.com",
+        clientSecret    : process.env.GOOGLE_CLIENT_SECRET ? process.env.GOOGLE_CLIENT_SECRET : "tMvl-W2cLFASjqyoYa8gYx1n",
+        callbackURL     : process.env.GOOGLE_CALLBACK_URL ? process.env.GOOGLE_CALLBACK_URL : "http://localhost:3000/auth/google/callback"
+    };
 
+    Mpassport.use('facebookMovie',new MFacebookStrategy(facebookConfig, facebookLogin));
+    Mpassport.use(new GoogleStrategy(googleConfig, googleStrategy));
+
+    function googleStrategy(token, refreshToken, profile, done) {
+        userModel
+            .findUserByGoogleId(profile.id)
+            .then(
+                function(user) {
+                    if(user) {
+                        return done(null, user);
+                    } else {
+                        var email = profile.emails[0].value;
+                        var emailParts = email.split("@");
+                        var newGoogleUser = {
+                            username:  emailParts[0],
+                            firstName: profile.name.givenName,
+                            lastName:  profile.name.familyName,
+                            email:     email,
+                            google: {
+                                id:    profile.id,
+                                token: token,
+                                displayName : profile.displayName
+                            }
+                        };
+                        return userModel.createUser(newGoogleUser)
+                            .then(
+                                function (user) {
+                                    return done(null, user);
+                                }
+                            )
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            )
+            .then(
+                function(user){
+                    return done(null, user);
+                },
+                function(err){
+                    if (err) { return done(err); }
+                }
+            );
+    }
 
     function facebookLogin(token, refreshToken, profile, done) {
         userModel

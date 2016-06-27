@@ -11,7 +11,8 @@ module.exports = function () {
         deleteUser : deleteUser,
         findFacebookUser : findFacebookUser,
         findAllUsers : findAllUsers,
-        findUsersWithIds : findUsersWithIds
+        findUsersWithIds : findUsersWithIds,
+        findUserByGoogleId : findUserByGoogleId
     };
     return api;
 
@@ -28,6 +29,10 @@ module.exports = function () {
 
     function findFacebookUser(id) {
         return User.findOne({"facebook.id" : id});
+    }
+
+    function findUserByGoogleId(googleId) {
+        return User.findOne({'google.id': googleId});
     }
 
     function createUser(user) {
