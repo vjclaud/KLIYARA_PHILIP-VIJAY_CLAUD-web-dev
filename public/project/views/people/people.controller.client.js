@@ -46,12 +46,15 @@
                         ids.push(vm.currentUser.following[key]);
                     }
 
-                    if(vm.followingList && ids.length > 0){
-                        MUserService
-                            .findUsersWithIds(ids)
-                            .then(function (response) {
-                                vm.users = response.data;
-                            })
+                    if(vm.followingList){
+                        if(ids.length > 0){
+                            MUserService
+                                .findUsersWithIds(ids)
+                                .then(function (response) {
+                                    vm.users = response.data;
+                                })
+                        }
+
                     }else{
                         MUserService
                             .findAllUsers()
@@ -70,7 +73,12 @@
             if(vm.followingList){
                 return person._id != vm.uid;
             }else{
-                return person._id != vm.uid && vm.currentUser.following[person._id] == null;
+                if(vm.currentUser.following ==null || vm.currentUser.following=='undefined'){
+                    return person._id != vm.uid;
+                }else{
+                    return person._id != vm.uid && vm.currentUser.following[person._id] == null;
+                }
+                
             }
 
         }

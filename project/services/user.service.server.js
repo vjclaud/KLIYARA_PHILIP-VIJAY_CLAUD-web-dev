@@ -72,6 +72,8 @@ module.exports = function(app, models) {
         callbackURL     : process.env.GOOGLE_CALLBACK_URL ? process.env.GOOGLE_CALLBACK_URL : "http://localhost:3000/auth/google/callback"
     };
 
+    //rhc env set GOOGLE_CLIENT_ID="546497096125-p036iouit4cj8ubcet2m929t13lcv3g9.apps.googleusercontent.com" GOOGLE_CLIENT_SECRET="tMvl-W2cLFASjqyoYa8gYx1n" GOOGLE_CALLBACK_URL="http://webdev-kliyaraphilip.rhcloud.com/auth/google/callback" -a webdev
+
     Mpassport.use('facebookMovie',new MFacebookStrategy(facebookConfig, facebookLogin));
     Mpassport.use(new GoogleStrategy(googleConfig, googleStrategy));
 
