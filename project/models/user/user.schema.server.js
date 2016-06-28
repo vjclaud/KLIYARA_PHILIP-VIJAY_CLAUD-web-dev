@@ -27,3 +27,6 @@ module.exports = function () {
 
     return UserSchema;
 };
+
+// db.project.user.find({'_id':'5771c93795b629bebbe894af'})
+// db.project.user.update({'username':'admin'}, {$set : {'admin' : true}})

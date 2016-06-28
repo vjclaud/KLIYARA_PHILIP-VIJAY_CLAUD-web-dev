@@ -21,6 +21,7 @@
                     .register(username,password)
                     .then(
                         function (response) {
+                            TMDBService.resetSearchObject();
                             var user = response.data;
                             $location.url("/user/" + user._id);
                         },

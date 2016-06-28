@@ -73,8 +73,8 @@
 
                     var arr = [];
                     if(vm.person.watchList){
-                        for (var key in vm.user.person) {
-                            arr.push(vm.user.person[key]);
+                        for (var key in vm.person.watchList) {
+                            arr.push(vm.person.watchList[key]);
                         }
                     }
                     vm.movies = arr;
