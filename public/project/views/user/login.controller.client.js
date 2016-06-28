@@ -19,7 +19,11 @@
                         var user = response.data;
                         if(user._id){
                             TMDBService.resetSearchObject();
-                            $location.url("/user/" + user._id);
+                            if(user.username==='admin'){
+                                $location.url("/admin");
+                            }else{
+                                $location.url("/user/" + user._id);
+                            }
                         }else{
                             vm.error = "user couldn't be found"
                         }

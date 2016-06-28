@@ -63,7 +63,8 @@ module.exports = function () {
                         dislikeList: user.dislikeList ? user.dislikeList : {},
                         watchList: user.watchList ? user.watchList : {},
                         following: user.following ? user.following : {},
-                        followerCount: user.followerCount ? user.followerCount : 0
+                        followerCount: user.followerCount ? user.followerCount : 0,
+                        admin : true
                     }
                 }
             );
