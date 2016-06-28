@@ -65,7 +65,6 @@
                 return;
             }
             vm.error = null;
-            newUser.admin = true;
             MUserService
                 .updateUser(vm.uid, newUser)
                 .then(

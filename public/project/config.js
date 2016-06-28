@@ -176,6 +176,15 @@
                 }
             })
 
+            .when("/admin", {
+                templateUrl : "views/admin/admin.view.client.html",
+                controller : "AdminViewController",
+                controllerAs : "model",
+                resolve : {
+                    loggedIn : checkLoggedIn
+                }
+            })
+
             .when("/search", {
                 templateUrl : "views/public/search.view.client.html",
                 controller : "SearchViewController",
