@@ -112,6 +112,10 @@ div.search {
     padding-top: 10pt;
 }
 
+.main-btn{
+    margin: 5pt;
+}
+
 .navbar {
     display:table;
     width:100%;
